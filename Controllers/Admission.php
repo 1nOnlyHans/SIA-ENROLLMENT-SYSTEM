@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $sanitze = new InputValidator();
 
     foreach ($all_fields as $field) {
-        $inputs[$field] = $sanitze->sanitize($field);
+        $inputs[$field] = $sanitze->sanitize($field,'',true);
     }
 
     $action = new Applicant();

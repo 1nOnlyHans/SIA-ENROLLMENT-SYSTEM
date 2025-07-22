@@ -21,7 +21,7 @@
             <form method="post" id="login-form">
                 <h1>Login</h1>
                 <div class="input-box">
-                    <input type="hidden" name="action-type" id="action-type" value="Login">
+                    <input type="hidden" name="actionType" id="actionType" value="Login">
                     <input type="text" placeholder="ID-Number" name="username" id="username"
                         required>
                     <i class="fa-solid fa-user"></i>
@@ -50,7 +50,7 @@
                 page = "Student"
             }
             setTimeout(() => {
-                window.location.href = `${page}Dashboard.php?page=StudentDashboard`;
+                window.location.href = `${page}Dashboard.php?page=${page}Dashboard`;
             }, 3000);
         }
 
@@ -59,11 +59,12 @@
                 event.preventDefault();
                 var formData = $(this).serialize();
                 $.ajax({
-                    method: "post",
+                    method: "POST",
                     url: "../Controllers/UserController.php",
                     data: formData,
                     dataType: "json",
                     success: function(response) {
+                        console.log(response);
                         if (response.status === "success") {
                             redirect(response.role);
                         }

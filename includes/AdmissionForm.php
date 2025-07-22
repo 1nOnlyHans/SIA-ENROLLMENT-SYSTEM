@@ -1,4 +1,3 @@
-
 <style>
     .step-indicator {
         display: flex;
@@ -149,10 +148,6 @@
                                     <h3 class="text-center mb-3">Select Course</h3>
                                     <select name="desired_course" id="desired_course" class="form-select">
                                         <option selected disabled>-- Select Desired Course --</option>
-                                        <option value="BSIT">Bachelor of Science in Information Technology</option>
-                                        <option value="BSCS">Bachelor of Science in Computer Science</option>
-                                        <option value="BSBA">Bachelor of Science in Business Administration</option>
-                                        <option value="BSEd">Bachelor of Secondary Education</option>
                                         <!-- Add more courses here -->
                                     </select>
                                 </div>
@@ -467,6 +462,29 @@
         let currentStep = $('#currentStep');
         currentStep.val(step)
 
+        const fetchAllCourse = async () => {
+            try {
+                const response = await $.ajax({
+                    method: "GET",
+                    url: "../Controllers/CourseController.php?actionType=GetAllCourse",
+                    dataType: "json",
+                });
+                console.log(response);
+                if (response.status === "success") {
+                    const select = $('#desired_course');
+                    let options = response.data.map((item) => {
+                        let option = $('<option></option>').val(item.id).text(item.course_name);
+                        return option;
+                    });
+                    select.append(options);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchAllCourse();
+
         const highlightStep = (currentStep) => {
             stepProgress.removeClass('active');
             $('.step[data-step="' + (currentStep - 1) + '"]').addClass('completed');
@@ -501,7 +519,7 @@
                 $('#nextbtn').addClass('d-none');
                 $('#donebtn').addClass('d-none');
                 $('.progress-line-completed').css('width', '63%')
-            } else if(step === 5){
+            } else if (step === 5) {
                 $('.step4').addClass('d-none');
                 $('.step5').removeClass('d-none');
                 $('#backbtn').addClass('d-none');
@@ -540,7 +558,7 @@
                         const error = `
                                 Fill Out the Required Fields
                             `;
-                        
+
                         // Update container HTML
                         errorContainer.html(error);
                     } else {
@@ -761,8 +779,7 @@
                             title: 'Success',
                             text: response.message
                         });
-                    }
-                    else{
+                    } else {
                         Swal.fire({
                             icon: `${response.status}`,
                             title: 'Failed',

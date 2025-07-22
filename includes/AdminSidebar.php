@@ -1,6 +1,6 @@
 <?php
 session_start();
-// include "./includes/dashboard_session.php";
+include "../includes/sessionchecker.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@ session_start();
     content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     name="viewport" />
   <?php
-  require "lib.php";
+    require "lib.php";
   ?>
 </head>
 
@@ -22,7 +22,7 @@ session_start();
     <div class="sidebar sidebar-style-2">
       <div class="sidebar-logo">
         <!-- Logo Header -->
-        <div class="logo-header bg-secondary">
+        <div class="logo-header bg-primary">
           <p class="text-white h5">Admin Panel</p>
           <div class="nav-toggle">
             <button class="btn btn-toggle toggle-sidebar">
@@ -40,7 +40,7 @@ session_start();
       </div>
       <div class="sidebar-wrapper scrollbar scrollbar-inner bg-light">
         <div class="sidebar-content">
-          <ul class="nav nav-secondary">
+          <ul class="nav nav-primary">
             <li class="nav-item">
               <a href="AdminDashboard.php?page=AdminDashboard">
                 <i class="fa-solid fa-house"></i>
@@ -54,21 +54,27 @@ session_start();
               </a>
             </li>
             <li class="nav-item">
-              <a href="AdminProductCategories.php?page=ProductCategories">
+              <a href="AdminDepartmentManagement.php?page=Department Management">
                 <i class="fa-solid fa-bell"></i>
-                <p>Product Categories</p>
+                <p>Deparment Management</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="AdminProductsManagement.php?page=ProductManagement">
+              <a href="AdminCourseManagement.php?page=Course Management">
                 <i class="fa-solid fa-bell"></i>
-                <p>Products</p>
+                <p>Course Management</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="AdminOrderManagement.php?page=OrderManagement">
+              <a href="AdminSubjectManagement.php?page=Subject Management">
                 <i class="fa-solid fa-chalkboard"></i>
-                <p>Orders</p>
+                <p>Subject Management</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="AdminInstructorManagement.php?page=Instructor Management">
+                <i class="fa-solid fa-chalkboard"></i>
+                <p>Instructor Management</p>
               </a>
             </li>
           </ul>
@@ -81,7 +87,7 @@ session_start();
       <div class="main-header">
         <div class="main-header-logo">
           <!-- Logo Header -->
-          <div class="logo-header bg-secondary">
+          <div class="logo-header bg-primary">
             <a href="index.html" class="logo text-white">
               Admin Panel
             </a>
@@ -101,7 +107,7 @@ session_start();
         </div>
         <!-- Navbar Header -->
         <nav
-          class="navbar navbar-header navbar-header-transparent navbar-expand-lg bg-secondary">
+          class="navbar navbar-header navbar-header-transparent navbar-expand-lg bg-primary">
           <div class="container-fluid">
             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
               <li class="nav-item topbar-user dropdown hidden-caret">
@@ -121,7 +127,7 @@ session_start();
                     <span class="op-7 text-white">Hi,</span>
                     <span class="fw-bold text-white">
                       <?php
-                      echo $_SESSION["current_user"]->firstname;
+                      echo $_SESSION['current_user']['role'];
                       ?>
                     </span>
                   </span>
@@ -133,23 +139,23 @@ session_start();
                         <div class="u-text text-white">
                           <h4>
                             <?php
-                            echo $_SESSION['current_user']->firstname . " " . $_SESSION["current_user"]->lastname;
+                            echo $_SESSION['current_user']['role'];
                             ?>
                           </h4>
                           <p class="text-muted ">
                             <?php
-                            echo $_SESSION["current_user"]->email;
+                            echo $_SESSION['current_user']['role'];
                             ?>
                           </p>
                           <a
                             href="AdminViewProfile.php?page=Profile"
-                            class="btn btn-xs btn-sm bg-secondary text-white">View Profile</a>
+                            class="btn btn-xs btn-sm bg-primary text-white">View Profile</a>
                         </div>
                       </div>
                     </li>
                     <li>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="Logout.php">Logout</a>
+                      <button type="button" class="dropdown-item" id="logoutBtn">Logout</button>
                     </li>
                   </div>
                 </ul>
@@ -159,3 +165,26 @@ session_start();
         </nav>
         <!-- End Navbar -->
       </div>
+
+      <script>
+        $(document).ready(function(){
+          $('#logoutBtn').on('click',function(){
+            $.ajax({
+              method: "POST",
+              url: "../Controllers/UserController.php",
+              data: {
+                actionType: "Logout"
+              },
+              dataType: "json",
+              success: function(response){
+                console.log(response);
+                if(response.status === "success"){
+                  window.location.href = `Login.php`;
+                }
+              },error: function(xhr){
+                console.log(xhr.responseText);
+              }
+            });
+          });
+        });
+      </script>

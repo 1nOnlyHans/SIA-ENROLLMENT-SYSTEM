@@ -1,5 +1,5 @@
 <?php
-
+require "Dbh.php";
 class Course extends Dbh
 {
     private $db;
@@ -50,17 +50,17 @@ class Course extends Dbh
         }
     }
 
-    // READ - Get all departments
+    // READ
     public function getAllCourses()
     {
-        // Add logic to fetch all departments from the database
+
         try {
-            $stmt = $this->db->prepare("SELECT * FROM courses");
+            $stmt = $this->db->prepare("SELECT departments.department_code, departments.department_name,courses.* FROM courses INNER JOIN departments ON departments.id = courses.department_id");
             $stmt->execute();
             $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return [
                 "status" => "success",
-                "message" => "Departments fetched successfully.",
+                "message" => "Courses fetched successfully.",
                 "data" => $courses
             ];
         } catch (PDOException $e) {
@@ -71,12 +71,31 @@ class Course extends Dbh
         }
     }
 
-    // READ - Get a single department by ID
+    public function getCourseByDepartment($department_id)
+    {
+
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM courses WHERE department_id = :department_id");
+            $stmt->execute(['department_id' => $department_id]);
+            $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return [
+                "status" => "success",
+                "message" => "Courses fetched successfully.",
+                "data" => $courses
+            ];
+        } catch (PDOException $e) {
+            return [
+                "status" => "404",
+                "message" => "Database Error: " . $e->getMessage()
+            ];
+        }
+    }
+    // READ - 
     public function getCourseById($id)
     {
-        // Add logic to fetch a department using its ID
+
         try {
-            $stmt = $this->db->prepare("SELECT * FROM courses WHERE id =:id");
+            $stmt = $this->db->prepare("SELECT departments.department_code, departments.department_name,courses.* FROM courses INNER JOIN departments ON departments.id = courses.department_id WHERE courses.id =:id");
             $stmt->execute(['id' => $id]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($row) {
@@ -99,7 +118,7 @@ class Course extends Dbh
         }
     }
 
-    // GET BY CODE
+
     public function getCourseByCode($code)
     {
         try {
@@ -126,27 +145,59 @@ class Course extends Dbh
         }
     }
 
-    // UPDATE
-    public function updateCourse($id, $department_id, $name, $code, $description, $status)
+    public function checkIfCourseCodeExists($id, $code)
     {
-        // Add logic to update the department with given ID
-        $findDepartment = $this->getCourseByCode($code);
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM courses WHERE course_code =:course_code AND id != :id");
+            $stmt->execute(['course_code' => $code, 'id' => $id]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($row) {
+                return [
+                    "status" => "success",
+                    "message" => "Course found.",
+                    "data" => $row
+                ];
+            } else {
+                return [
+                    "status" => "error",
+                    "message" => "Course not found."
+                ];
+            }
+        } catch (PDOException $e) {
+            return [
+                "status" => "404",
+                "message" => "Database Error: " . $e->getMessage()
+            ];
+        }
+    }
 
-        if ($findDepartment['status'] === "error") {
+    public function updateCourse($id, $department_id, $course_code, $course_name, $course_description)
+    {
+
+        $findCourse = $this->getCourseById($id);
+        $checkIfCourseCodeExists = $this->checkIfCourseCodeExists($id, $course_code);
+
+        if ($findCourse['status'] === "error") {
             return [
                 "status" => "error",
                 "message" => "Invalid Course"
             ];
         }
 
+        if ($checkIfCourseCodeExists['status'] === "success") {
+            return [
+                "status" => "error",
+                "message" => "Update failed: The course code is already in use. Please choose a different code."
+            ];
+        }
+
         try {
-            $stmt = $this->db->prepare("UPDATE courses SET department_id = :department_id, course_code = :course_code,course_name =:course_name, course_description = :course_description, status = :status WHERE id = :id");
+            $stmt = $this->db->prepare("UPDATE courses SET department_id = :department_id, course_code = :course_code,course_name =:course_name, course_description = :course_description WHERE id = :id");
             $stmt->execute([
                 'department_id' => $department_id,
-                'course_code' => $code,
-                'course_name' => $name,
-                'course_description' => $description,
-                'status' => $status,
+                'course_code' => $course_code,
+                'course_name' => $course_name,
+                'course_description' => $course_description,
                 'id' => $id
             ]);
 

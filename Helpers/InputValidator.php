@@ -21,12 +21,16 @@ class InputValidator
         }
     }
 
-    public function sanitize($key){
-        $value = isset($_POST[$key]) ? htmlspecialchars(trim($_POST[$key])) : '';
-        if($value){
+    public function sanitize($key, $default = '', $ucwords = false)
+    {
+        $value = $_REQUEST[$key] ?? $default;
+        $value = trim($value);
+        $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+
+        if($ucwords){
             $value = ucwords($value);
         }
+        
         return $value;
     }
-    
 }

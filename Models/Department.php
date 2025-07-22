@@ -1,5 +1,5 @@
 <?php
-
+require "Dbh.php";
 class Department extends Dbh
 {
     private $db;
@@ -18,7 +18,7 @@ class Department extends Dbh
         if ($departmentExists['status'] === "success") {
             return [
                 "status" => "error",
-                "message" => "Department is already exists"
+                "message" => "Department already exists"
             ];
         }
 
@@ -54,7 +54,26 @@ class Department extends Dbh
     {
         // Add logic to fetch all departments from the database
         try {
-            $stmt = $this->db->prepare("SELECT * FROM departments");
+            $stmt = $this->db->prepare("SELECT * FROM departments WHERE status != 'Archived'");
+            $stmt->execute();
+            $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return [
+                "status" => "success",
+                "message" => "Departments fetched successfully.",
+                "data" => $departments
+            ];
+        } catch (PDOException $e) {
+            return [
+                "status" => "404",
+                "message" => "Database Error: " . $e->getMessage()
+            ];
+        }
+    }
+
+    public function getAllArchivedDepartments()
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM departments WHERE status == 'Archived'");
             $stmt->execute();
             $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return [
@@ -125,26 +144,55 @@ class Department extends Dbh
         }
     }
 
+    public function checkIfDepartmentCodeExists($id, $code)
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM departments WHERE department_code =:department_code AND id != :id");
+            $stmt->execute(['department_code' => $code, 'id' => $id]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($row) {
+                return [
+                    "status" => "success",
+                    "message" => "Department found.",
+                    "data" => $row
+                ];
+            } else {
+                return [
+                    "status" => "error",
+                    "message" => "Department not found."
+                ];
+            }
+        } catch (PDOException $e) {
+            return [
+                "status" => "404",
+                "message" => "Database Error: " . $e->getMessage()
+            ];
+        }
+    }
+
     // UPDATE
-    public function updateDepartment($id, $name, $code, $description, $status)
+    public function updateDepartment($id, $name, $code, $description)
     {
         // Add logic to update the department with given ID
-        $findDepartment = $this->getDepartmentByCode($code);
+        $validateDepartmentCode = $this->checkIfDepartmentCodeExists($id, $code);
 
-        if ($findDepartment['status'] === "error") {
+        if ($validateDepartmentCode['status'] === "success") {
             return [
                 "status" => "error",
-                "message" => "Invalid Department"
+                "message" => "Update failed: The department code is already in use. Please choose a different code."
             ];
         }
 
         try {
-            $stmt = $this->db->prepare("UPDATE departments SET department_name =:deparment_name, department_code =:department_code, department_description = :department_description, status = :status WHERE id = id");
+            $stmt = $this->db->prepare(
+                "UPDATE departments SET department_name =:department_name, department_code =:department_code, department_description = :department_description WHERE id = :id
+                "
+            );
             $stmt->execute([
                 'department_name' => $name,
                 'department_code' => $code,
                 'department_description' => $description,
-                'status' => $status,
+                'id' => $id,
             ]);
 
             if ($stmt->rowCount() > 0) {
@@ -166,28 +214,34 @@ class Department extends Dbh
         }
     }
 
-    // DELETE
-    public function deleteDepartment($id)
+    // Archive
+    public function archiveDepartment($id)
     {
+        $archivedStatus = "Archived";
+
         try {
-            $stmt = $this->db->prepare("DELETE FROM departments WHERE id = :id");
-            $stmt->execute(['id' => $id]);
+            // Mark the department as archived instead of deleting
+            $stmt = $this->db->prepare("UPDATE departments SET status = :status WHERE id = :id");
+            $stmt->execute([
+                'status' => $archivedStatus,
+                'id' => $id
+            ]);
 
             if ($stmt->rowCount() > 0) {
                 return [
                     "status" => "success",
-                    "message" => "Department deleted successfully."
+                    "message" => "Department archived successfully."
                 ];
             } else {
                 return [
                     "status" => "error",
-                    "message" => "Department not found or already deleted."
+                    "message" => "Department not found or is already archived."
                 ];
             }
         } catch (PDOException $e) {
             return [
                 "status" => "error",
-                "message" => "Database Error: " . $e->getMessage()
+                "message" => "Database error: " . $e->getMessage()
             ];
         }
     }
