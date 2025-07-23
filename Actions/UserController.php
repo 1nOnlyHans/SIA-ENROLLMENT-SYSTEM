@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../Models/User.php';
+require '../class/User.php';
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 

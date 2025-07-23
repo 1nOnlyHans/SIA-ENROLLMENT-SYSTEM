@@ -171,7 +171,7 @@ include "../includes/sessionchecker.php";
           $('#logoutBtn').on('click',function(){
             $.ajax({
               method: "POST",
-              url: "../Controllers/UserController.php",
+              url: "../Actions/UserController.php",
               data: {
                 actionType: "Logout"
               },

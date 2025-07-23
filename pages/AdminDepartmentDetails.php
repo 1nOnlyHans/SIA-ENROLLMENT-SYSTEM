@@ -100,7 +100,7 @@
             try {
                 const response = await $.ajax({
                     method: "POST",
-                    url: "../Controllers/DepartmentController.php",
+                    url: "../Actions/DepartmentController.php",
                     data: {
                         actionType: "GetDepartmentById",
                         department_id: id
@@ -124,7 +124,7 @@
 
             $.ajax({
                 method: "POST",
-                url: "../Controllers/DepartmentController.php",
+                url: "../Actions/DepartmentController.php",
                 data: formData,
                 dataType: "json",
                 success: function(response) {
@@ -153,7 +153,7 @@
         $('#archiveBtn').on('click', function() {
             $.ajax({
                 method: "POST",
-                url: "../Controllers/DepartmentController.php",
+                url: "../Actions/DepartmentController.php",
                 data: {
                     actionType: "ArchiveDepartment",
                     department_id: id,

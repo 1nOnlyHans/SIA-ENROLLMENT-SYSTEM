@@ -72,7 +72,7 @@ include "../includes/AdminSidebar.php";
             try {
                 const response = await $.ajax({
                     method: "GET",
-                    url: "../Controllers/DepartmentController.php?actionType=GetAllDepartments",
+                    url: "../Actions/DepartmentController.php?actionType=GetAllDepartments",
                     dataType: "json",
                 });
                 console.log(response);
@@ -90,6 +90,7 @@ include "../includes/AdminSidebar.php";
         }
 
         const setValue = (data) => {
+            $('#title').text(data.course_name + " " + "(" + data.course_code + ")");
             $('#view-department-name').text(data.department_name);
             $('#view-course-code').text(data.course_code);
             $('#view-course-name').text(data.course_name);
@@ -123,7 +124,7 @@ include "../includes/AdminSidebar.php";
             try {
                 const response = await $.ajax({
                     method: "POST",
-                    url: "../Controllers/CourseController.php",
+                    url: "../Actions/CourseController.php",
                     data: {
                         actionType: "GetCourseById",
                         course_id: id
@@ -148,7 +149,7 @@ include "../includes/AdminSidebar.php";
 
             $.ajax({
                 method: "POST",
-                url: "../Controllers/CourseController.php",
+                url: "../Actions/CourseController.php",
                 data: formData,
                 dataType: "json",
                 success: function(response) {

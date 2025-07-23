@@ -1,0 +1,96 @@
+<?php
+require_once "../class/Applicant.php";
+require_once "../Helpers/InputValidator.php";
+
+$sanitize = new InputValidator();
+$applicant = new Applicant();
+
+$step = $sanitize->sanitize('step');
+
+$requestMethod = $_SERVER['REQUEST_METHOD'];
+
+$response = [
+    "status" => "error",
+    "message" => "Invalid action or method"
+];
+
+$other_fields = ['middlename', 'suffix'];
+
+$required_fields = [
+    'desired_course',
+    'firstname',
+    'lastname',
+    'gender',
+    'nationality',
+    'dob',
+    'address',
+    'email',
+    'shs_school',
+    'year_graduated',
+    'course_strand'
+];
+
+$all_fields = array_merge($other_fields, $required_fields);
+
+$inputs = [];
+$errors = [];
+$status = 'success';
+
+foreach ($all_fields as $field) {
+    $inputs[$field] = $sanitize->sanitize($field, '', true);
+}
+
+switch ($step) {
+    case 1:
+        foreach ($required_fields as $field) {
+            if (empty($inputs[$field])) {
+                $errors[$field] = ucfirst(str_replace('_', ' ', $field)) . ' ' . 'is required';
+            }
+        }
+
+        if (count($errors) > 0) {
+            $status = 'error';
+        }
+
+        $response = [
+            "status" => $status,
+            "errors" => $errors,
+            "data" => $inputs
+        ];
+
+        break;
+    case 2:
+        $response = [
+            "status" => "success",
+            "errors" => $errors,
+        ];
+        break;
+    case 3:
+        $action = $applicant->submitApplication(
+            $inputs['desired_course'],
+            $inputs['firstname'],
+            $inputs['middlename'],
+            $inputs['lastname'],
+            $inputs['suffix'],
+            $inputs['gender'],
+            $inputs['nationality'],
+            $inputs['dob'],
+            $inputs['address'],
+            $inputs['email'],
+            $inputs['shs_school'],
+            $inputs['year_graduated'],
+            $inputs['course_strand']
+        );
+        $response = [
+            $action,
+            "errors" => [],
+        ];
+        break;
+    default:
+        $response = [
+            "status" => "error",
+            "message" => "Unknown action"
+        ];
+}
+
+echo json_encode($response);

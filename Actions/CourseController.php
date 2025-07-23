@@ -1,6 +1,6 @@
 <?php
 require "../Helpers/InputValidator.php";
-require "../Models/Course.php";
+require "../class/Course.php";
 
 $sanitize = new InputValidator();
 $actionType = $sanitize->sanitize('actionType', '', false);

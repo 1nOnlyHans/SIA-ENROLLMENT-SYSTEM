@@ -1,5 +1,5 @@
 <?php
-require "Dbh.php";
+require_once "Dbh.php";
 class Course extends Dbh
 {
     private $db;
@@ -71,9 +71,9 @@ class Course extends Dbh
         }
     }
 
+    //Not yet implemented
     public function getCourseByDepartment($department_id)
     {
-
         try {
             $stmt = $this->db->prepare("SELECT * FROM courses WHERE department_id = :department_id");
             $stmt->execute(['department_id' => $department_id]);
@@ -90,6 +90,7 @@ class Course extends Dbh
             ];
         }
     }
+
     // READ - 
     public function getCourseById($id)
     {

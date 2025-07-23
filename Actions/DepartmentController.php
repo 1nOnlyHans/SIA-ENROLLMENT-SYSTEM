@@ -1,7 +1,7 @@
 <?php
 
 require "../Helpers/InputValidator.php";
-require "../Models/Department.php";
+require "../class/Department.php";
 
 $sanitize = new InputValidator();
 $actionType = $sanitize -> sanitize('actionType','',false);

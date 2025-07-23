@@ -60,7 +60,7 @@
                 var formData = $(this).serialize();
                 $.ajax({
                     method: "POST",
-                    url: "../Controllers/UserController.php",
+                    url: "../Actions/UserController.php",
                     data: formData,
                     dataType: "json",
                     success: function(response) {

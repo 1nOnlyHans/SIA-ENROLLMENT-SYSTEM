@@ -2,18 +2,19 @@
 include "../includes/AdminSidebar.php";
 ?>
 
-<div class="container">
+<div class="container" id="print">
     <div class="page-inner">
         <div class="card">
             <div class="card-body">
-                <h2>List of Departments</h2>
-                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#AddDepartment">+ New Department</button>
-                <table class="table table-responsive table-bordered table-striped" id="department-tbl">
+                <h2>List of Courses</h2>
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#AddCourse">+ New Course</button>
+                <table class="table table-responsive table-bordered table-striped" id="course-tbl">
                     <thead class="thead-dark">
                         <tr>
-                            <th class="text-center">Department Code</th>
-                            <th class="text-center">Department Name</th>
-                            <th class="text-center">Department Description</th>
+                            <th class="text-center">Course Department</th>
+                            <th class="text-center">Course Code</th>
+                            <th class="text-center">Course Name</th>
+                            <th class="text-center">Course Description</th>
                             <th class="text-center">Created At</th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -26,39 +27,42 @@ include "../includes/AdminSidebar.php";
 </div>
 
 <?php
-include "../includes/AddDepartmentModal.php";
+include "../includes/AddCourseModal.php";
 ?>
 <script>
     $(document).ready(function() {
-
-        const fetchDepartments = async () => {
+        const fetchAllCourse = async () => {
             try {
                 const response = await $.ajax({
                     method: "GET",
-                    url: "../Controllers/DepartmentController.php?actionType=GetAllDepartments",
+                    url: "../Actions/CourseController.php?actionType=GetAllCourse",
                     dataType: "json",
                 });
                 console.log(response);
                 if (response.status === "success") {
-                    $('#department-tbl').DataTable({
+                    $('#course-tbl').DataTable({
                         data: response.data,
                         columns: [{
                                 data: "department_code",
                                 class: "text-center"
                             },
                             {
-                                data: "department_name",
+                                data: "course_code",
                                 class: "text-center"
                             },
                             {
-                                data: "department_description",
+                                data: "course_name",
+                                class: "text-center"
+                            },
+                            {
+                                data: "course_description",
                                 class: "text-center"
                             },
                             {
                                 data: null,
                                 class: "text-center",
                                 render: function(data, type, row) {
-                                    const formattedDate = new Date(data.added_at).toLocaleDateString("en-US", {
+                                    const formattedDate = new Date(data.created_at).toLocaleDateString("en-US", {
                                         year: "numeric",
                                         month: "long",
                                         day: "numeric",
@@ -71,7 +75,7 @@ include "../includes/AddDepartmentModal.php";
                                 render: function(data, type, row) {
                                     return `
                                             <div class="d-flex justify-content-center align-content-center">
-                                                <a class="btn btn-dark" href="AdminDepartmentDetails.php?page=${data.department_name} Details&department_id=${data.id}"">View</a>
+                                                <a class="btn btn-dark" href="AdminCourseDetails.php?page=${data.course_name} Details&course_id=${data.id}"">View</a>
                                             </div>
                                         `;
                                 }
@@ -88,29 +92,29 @@ include "../includes/AddDepartmentModal.php";
                         dom: "Blfrtip",
                         buttons: [{
                                 extend: "print",
-                                title: "List of Departments",
+                                title: "List of Courses",
                                 text: "Print",
-                                className: "btn btn-dark me-3 mb-3",
+                                className: "btn btn-primary me-3 mb-3",
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3]
+                                    columns: [0, 1, 2, 3, 4]
                                 }
                             },
                             {
                                 extend: "csv",
-                                title: "List of Departments",
+                                title: "List of Courses",
                                 text: "CSV",
-                                className: "btn btn-dark me-3 mb-3",
+                                className: "btn btn-primary me-3 mb-3",
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3]
+                                    columns: [0, 1, 2, 3, 4]
                                 }
                             },
                             {
                                 extend: "pdf",
-                                title: "List of Departments",
+                                title: "List of Courses",
                                 text: "PDF",
-                                className: "btn btn-dark me-3 mb-3",
+                                className: "btn btn-primary me-3 mb-3",
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3]
+                                    columns: [0, 1, 2, 3, 4]
                                 }
                             }
                         ]
@@ -121,21 +125,21 @@ include "../includes/AddDepartmentModal.php";
             }
         }
 
-        fetchDepartments();
+        fetchAllCourse();
 
-        $('#create-department-form').on('submit', function(event) {
+        $('#create-course-form').on('submit', function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
             $.ajax({
                 method: "POST",
-                url: "../Controllers/DepartmentController.php",
+                url: "../Actions/CourseController.php",
                 data: formData,
                 dataType: "json",
                 success: function(response) {
                     if (response.status === "success") {
-                        fetchDepartments();
-                        $('#create-department-form')[0].reset();
-                        let Modal = bootstrap.Modal.getInstance(document.getElementById('AddDepartment'));
+                        fetchAllCourse();
+                        $('#create-course-form')[0].reset();
+                        let Modal = bootstrap.Modal.getInstance(document.getElementById('AddCourse'));
                         Modal.hide();
                         Swal.fire({
                             icon: "success",
