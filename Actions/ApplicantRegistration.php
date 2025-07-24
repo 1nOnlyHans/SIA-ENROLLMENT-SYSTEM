@@ -66,25 +66,46 @@ switch ($step) {
         ];
         break;
     case 3:
-        $action = $applicant->submitApplication(
-            $inputs['desired_course'],
-            $inputs['firstname'],
-            $inputs['middlename'],
-            $inputs['lastname'],
-            $inputs['suffix'],
-            $inputs['gender'],
-            $inputs['nationality'],
-            $inputs['dob'],
-            $inputs['address'],
-            $inputs['email'],
-            $inputs['shs_school'],
-            $inputs['year_graduated'],
-            $inputs['course_strand']
-        );
-        $response = [
-            $action,
-            "errors" => [],
-        ];
+        // $action = $applicant->submitApplication(
+        //     $inputs['desired_course'],
+        //     $inputs['firstname'],
+        //     $inputs['middlename'],
+        //     $inputs['lastname'],
+        //     $inputs['suffix'],
+        //     $inputs['gender'],
+        //     $inputs['nationality'],
+        //     $inputs['dob'],
+        //     $inputs['address'],
+        //     $inputs['email'],
+        //     $inputs['shs_school'],
+        //     $inputs['year_graduated'],
+        //     $inputs['course_strand']
+        // );
+        // $response = [
+        //     $action,
+        //     "errors" => [],
+        // ];
+        $file = "../json/registration.json";
+        $current_data = file_get_contents($file);
+        $data = json_decode($current_data, true);
+        $data_to_insert = $inputs;
+        $data[] = $data_to_insert;
+        $final_data = json_encode($data);
+        if (file_exists($file)) {
+            if (file_put_contents($file, $final_data)) {
+                $response = [
+                    "status" => "success",
+                    "message" => "Data append successfully",
+                    "errors" => []
+                ];
+            } else {
+                $response = [
+                    "status" => "error",
+                    "message" => "Data append failed",
+                    "errors" => []
+                ];
+            }
+        }
         break;
     default:
         $response = [

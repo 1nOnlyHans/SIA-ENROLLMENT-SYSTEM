@@ -1,3 +1,77 @@
 [
-
+  {
+    "middlename": "Constance Arnold",
+    "suffix": "Iusto Minus Expedita",
+    "desired_course": "3",
+    "firstname": "Colin",
+    "lastname": "Johnston",
+    "gender": "Female",
+    "nationality": "Chinese",
+    "dob": "1989-05-26",
+    "address": "Culpa Eius Labore E",
+    "email": "Nedelu@mailinator.com",
+    "shs_school": "In Totam Alias Venia",
+    "year_graduated": "1974",
+    "course_strand": "Irure Placeat Ullam"
+  },
+  {
+    "middlename": "Cyrus Knox",
+    "suffix": "Expedita Dignissimos",
+    "desired_course": "2",
+    "firstname": "Lee",
+    "lastname": "Schroeder",
+    "gender": "Female",
+    "nationality": "Australian",
+    "dob": "1991-07-24",
+    "address": "Distinctio Velit Ea",
+    "email": "Xusyrazu@mailinator.com",
+    "shs_school": "In Lorem Sapiente Se",
+    "year_graduated": "2003",
+    "course_strand": "Voluptatem Nulla Inv"
+  },
+  {
+    "middlename": "Basil Richardson",
+    "suffix": "Libero Quia Error Vo",
+    "desired_course": "3",
+    "firstname": "Azalia",
+    "lastname": "Ingram",
+    "gender": "Female",
+    "nationality": "Filipino",
+    "dob": "2008-05-09",
+    "address": "Et Sequi Rem Placeat",
+    "email": "Lejiseq@mailinator.com",
+    "shs_school": "Exercitationem Simil",
+    "year_graduated": "2001",
+    "course_strand": "Officia Sed Aut Haru"
+  },
+  {
+    "middlename": "Ann Pennington",
+    "suffix": "Quis Laborum Conseq",
+    "desired_course": "3",
+    "firstname": "Medge",
+    "lastname": "Woodard",
+    "gender": "Male",
+    "nationality": "Japanese",
+    "dob": "2024-09-27",
+    "address": "Recusandae Sit Ad A",
+    "email": "Rivusa@mailinator.com",
+    "shs_school": "Quis Eos Tempora Au",
+    "year_graduated": "1995",
+    "course_strand": "Incidunt Tempore S"
+  },
+  {
+    "middlename": "Ang",
+    "suffix": "",
+    "desired_course": "1",
+    "firstname": "Hans Andrei",
+    "lastname": "Diaz",
+    "gender": "Male",
+    "nationality": "Filipino",
+    "dob": "2005-06-20",
+    "address": "Blk 1 Lot 1 Wano Kuni Kudasai",
+    "email": "Hansdiaz@gmail.com",
+    "shs_school": "Philippine Christian College",
+    "year_graduated": "2023",
+    "course_strand": "Gas"
+  }
 ]

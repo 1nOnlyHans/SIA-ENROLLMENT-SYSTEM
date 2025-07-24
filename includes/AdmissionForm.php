@@ -106,6 +106,7 @@
         min-width: 120px;
     }
 </style>
+
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -133,7 +134,7 @@
                         </div>
                     </div> <!-- .step-indicator -->
                     <div class="alert alert-danger d-none bg-danger text-white" id="errorContainer"></div>
-
+                    <!-- Reg Form -->
                     <form method="post" enctype="multipart/form-data" id="admission-form" class="needs-validation" novalidate>
                         <input type="hidden" name="step" id="step" class="form-control">
                         <div id="step1">
@@ -216,13 +217,16 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Step 2 -->
                         <div class="d-none" id="step2"></div>
+                        <!-- Step 3 -->
                         <div class="d-none" id="step3">
                             <div class="d-flex flex-column">
                                 <h1 class="text-center">Submit application</h1>
-                                <p class="text-center">By clicking the submit button you will proceed to online admission</p>
+                                <p class="text-center">By clicking the submit button your online application will be submitted</p>
                             </div>
                         </div>
+                        <!-- Step 4 -->
                         <div class="d-none" id="step4">
                             <div class="d-flex flex-column">
                                 <h1 class="text-center">Successfully Submitted</h1>
@@ -241,45 +245,51 @@
     </div>
 </div>
 
-
-
 <script>
     $(document).ready(function() {
+        // Current Step Value
         let currentStep = 1;
         const stepProgress = $('.step');
         const step = $('#step');
         step.val(currentStep);
 
+        // For Current Progress Highlighting
         const highlightStep = (currentStep) => {
             stepProgress.removeClass('active');
             $('.step[data-step="' + (currentStep - 1) + '"]').addClass('completed');
             $('.step[data-step="' + currentStep + '"]').addClass('active');
         }
 
+        // For Displaying Data depending on the current step
         const currentProgress = (currentStep) => {
             if (currentStep === 1) {
                 $('#step1').removeClass('d-none');
                 $('#step2').addClass('d-none');
                 $('#backbtn').addClass('d-none');
+                $('.progress-line-completed').css('width', '0%');
             } else if (currentStep === 2) {
                 $('#step1').addClass('d-none');
                 $('#step2').removeClass('d-none');
                 $('#step3').addClass('d-none');
                 $('#backbtn').removeClass('d-none');
+                $('.progress-line-completed').css('width', '18%');
             } else if (currentStep === 3) {
                 $('#step2').addClass('d-none');
                 $('#step3').removeClass('d-none');
                 $('#step4').addClass('d-none');
                 $('#nextBtn').text('Submit');
+                $('.progress-line-completed').css('width', '50%');
             } else if (currentStep === 4) {
                 $('#step3').addClass('d-none');
                 $('#step4').removeClass('d-none');
                 $('#backbtn').addClass('d-none');
                 $('#nextBtn').addClass('d-none');
                 $('#doneBtn').removeClass('d-none');
+                $('.progress-line-completed').css('width', '100%');
             }
         }
 
+        // Back Button
         $('#backbtn').on('click', function() {
             if (currentStep > 1) {
                 currentStep--;
@@ -289,6 +299,7 @@
             }
         });
 
+        // For Displaying all the available course
         const fetchAvailableCourse = async () => {
             try {
                 const response = await $.ajax({
@@ -312,6 +323,7 @@
 
         fetchAvailableCourse();
 
+        // For Validating Details in Step 2
         const viewDetails = (desired_course, firstname, middlename, lastname, suffix, gender, nationality, dob, address, email, shs_school, year_graduated, course_strand) => `
             <h3>Program Selected</h3>
             <table class="table table-bordered">
@@ -377,6 +389,7 @@
             </table>
         `;
 
+        // Bootstrap Form Validation
         (function() {
             'use strict'
 
@@ -395,6 +408,7 @@
                 })
         })();
 
+        // Submitting the data in the backend
         $('#admission-form').on('submit', function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
@@ -404,7 +418,7 @@
                 data: formData,
                 dataType: "json",
                 success: function(response) {
-                    //DITO
+
                     console.log(response);
                     if (response.errors.length <= 0) {
                         if (currentStep < 5) {
@@ -441,7 +455,5 @@
                 }
             });
         });
-
-
     });
 </script>
