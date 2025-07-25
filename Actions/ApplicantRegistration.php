@@ -66,31 +66,12 @@ switch ($step) {
         ];
         break;
     case 3:
-        // $action = $applicant->submitApplication(
-        //     $inputs['desired_course'],
-        //     $inputs['firstname'],
-        //     $inputs['middlename'],
-        //     $inputs['lastname'],
-        //     $inputs['suffix'],
-        //     $inputs['gender'],
-        //     $inputs['nationality'],
-        //     $inputs['dob'],
-        //     $inputs['address'],
-        //     $inputs['email'],
-        //     $inputs['shs_school'],
-        //     $inputs['year_graduated'],
-        //     $inputs['course_strand']
-        // );
-        // $response = [
-        //     $action,
-        //     "errors" => [],
-        // ];
         $file = "../json/registration.json";
         $current_data = file_get_contents($file);
         $data = json_decode($current_data, true);
         $data_to_insert = $inputs;
         $data[] = $data_to_insert;
-        $final_data = json_encode($data);
+        $final_data = json_encode($data, JSON_PRETTY_PRINT);
         if (file_exists($file)) {
             if (file_put_contents($file, $final_data)) {
                 $response = [
@@ -106,6 +87,54 @@ switch ($step) {
                 ];
             }
         }
+        break;
+    case 5:
+        // REFACTOR
+        $action = $applicant->submitApplication(
+            $inputs['desired_course'],
+            $inputs['firstname'],
+            $inputs['middlename'],
+            $inputs['lastname'],
+            $inputs['suffix'],
+            $inputs['gender'],
+            $inputs['nationality'],
+            $inputs['dob'],
+            $inputs['address'],
+            $inputs['email'],
+            $inputs['shs_school'],
+            $inputs['year_graduated'],
+            $inputs['course_strand']
+        );
+        $target = $inputs['email'];
+        $file = "../json/registration.json";
+        $current_data = file_get_contents($file);
+        $data = json_decode($current_data, true);
+
+        if (!is_array($data)) {
+            $data = [];
+        }
+
+        $data = array_filter($data, function ($entry) use ($target) {
+            return $entry['email'] !== $target;
+        });
+
+        $data = array_values($data);
+
+        $final_data = json_encode($data, JSON_PRETTY_PRINT);
+
+        if (file_put_contents($file, $final_data)) {
+            $response = [
+                $action,
+                "errors" => [],
+                "message" => "User removed successfully."
+            ];
+        } else {
+            $response = [
+                "status" => "error",
+                "message" => "Failed to write to JSON file. Check file permissions.",
+            ];
+        }
+
         break;
     default:
         $response = [
