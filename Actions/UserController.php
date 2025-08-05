@@ -1,18 +1,17 @@
 <?php
 session_start();
 require '../class/User.php';
+require "../Helpers/InputHandler.php";
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    $sanitize = new InputValidator();
-
-    $actionType = $sanitize -> sanitize('actionType');
+    $actionType = InputHandler::sanitize_string($_REQUEST['actionType']);
 
     switch ($actionType) {
         case 'Login':
             $action = new User();
-            $username = $sanitize->sanitize('username');
-            $password = $sanitize->sanitize('password');
+            $username = InputHandler::sanitize_string($_POST['username']);
+            $password = InputHandler::sanitize_string($_POST['password']);
             echo json_encode($action->login($username, $password));
             break;
         case 'Logout':
@@ -29,7 +28,4 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 "message" => "Invalid Action Type"
             ]);
     }
-
-    
 }
-

@@ -1,10 +1,9 @@
 <?php
 
-require "../Helpers/InputValidator.php";
 require "../class/Department.php";
+require "../Helpers/InputHandler.php";
 
-$sanitize = new InputValidator();
-$actionType = $sanitize -> sanitize('actionType','',false);
+$actionType = InputHandler::sanitize_string($_REQUEST['actionType']);
 
 $action = new Department();
 $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -14,12 +13,13 @@ $response = [
     "message" => "Invalid action or method"
 ];
 
+//Refactor
 switch ($actionType) {
     case 'CreateDepartment':
         if ($requestMethod === "POST") {
-            $department_name = $sanitize->sanitize('department_name','',true);
-            $department_code = $sanitize->sanitize('department_code','',true);
-            $department_description = $sanitize->sanitize('department_description','',true);
+            $department_name = InputHandler::sanitize_name($_POST['department_name'] ?? '');
+            $department_code = InputHandler::sanitize_string($_POST['department_code'] ?? '');
+            $department_description = InputHandler::sanitize_string($_POST['department_description'] ?? '');
             $response = $action->createDepartment($department_name, $department_code, $department_description);
         }
         break;
@@ -30,23 +30,23 @@ switch ($actionType) {
         break;
     case 'GetDepartmentById':
         if ($requestMethod === "POST") {
-            $id = $sanitize->sanitize('department_id');
+            $id = InputHandler::sanitize_int($_POST['department_id'] ?? '');
             $response = $action->getDepartmentById($id);
         }
         break;
     case 'UpdateDepartment':
         if ($requestMethod === "POST") {
-            $id = $sanitize->sanitize('department_id');
-            $code = $sanitize->sanitize('department_code');
-            $name = $sanitize->sanitize('department_name','',true);
-            $description = $sanitize->sanitize('department_description','',true);
-            $response = $action->updateDepartment($id,$name,$code,$description);
+            $id = InputHandler::sanitize_int($_POST['department_id'] ?? '');
+            $department_name = InputHandler::sanitize_name($_POST['department_name'] ?? '');
+            $department_code = InputHandler::sanitize_string($_POST['department_code'] ?? '');
+            $department_description = InputHandler::sanitize_string($_POST['department_description'] ?? '');
+            $response = $action->updateDepartment($id, $department_name, $department_code, $department_description);
         }
         break;
     case 'ArchiveDepartment':
-        if($requestMethod === "POST"){
-            $id = $sanitize->sanitize('department_id');
-            $response = $action -> archiveDepartment($id);
+        if ($requestMethod === "POST") {
+            $id = InputHandler::sanitize_int($_POST['department_id'] ?? '');
+            $response = $action->archiveDepartment($id);
         }
         break;
     default:
@@ -54,6 +54,7 @@ switch ($actionType) {
             "status" => "error",
             "message" => "Unknown action: $actionType"
         ];
+        break;
 }
 
 echo json_encode($response);

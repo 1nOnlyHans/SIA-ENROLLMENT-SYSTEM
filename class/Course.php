@@ -18,7 +18,7 @@ class Course extends Dbh
         if ($courseExists['status'] === "success") {
             return [
                 "status" => "error",
-                "message" => "Course already exists"
+                "message" => "Failed to create course, course code already exists"
             ];
         }
 
@@ -94,7 +94,6 @@ class Course extends Dbh
     // READ - 
     public function getCourseById($id)
     {
-
         try {
             $stmt = $this->db->prepare("SELECT departments.department_code, departments.department_name,courses.* FROM courses INNER JOIN departments ON departments.id = courses.department_id WHERE courses.id =:id");
             $stmt->execute(['id' => $id]);
@@ -222,16 +221,18 @@ class Course extends Dbh
     }
 
     // DELETE // Instead of deleting just update the status 
-    public function deleteCourse($id)
+    public function archiveCourse($id)
     {
+        $archivedStatus = "Archived";
+
         try {
-            $stmt = $this->db->prepare("DELETE FROM courses WHERE id = :id");
-            $stmt->execute(['id' => $id]);
+            $stmt = $this->db->prepare("UPDATE courses SET status =:status WHERE id = :id");
+            $stmt->execute(['status' => $archivedStatus, 'id' => $id]);
 
             if ($stmt->rowCount() > 0) {
                 return [
                     "status" => "success",
-                    "message" => "Course deleted successfully."
+                    "message" => "Course has been archived."
                 ];
             } else {
                 return [
@@ -239,6 +240,7 @@ class Course extends Dbh
                     "message" => "Course not found or already deleted."
                 ];
             }
+            
         } catch (PDOException $e) {
             return [
                 "status" => "error",

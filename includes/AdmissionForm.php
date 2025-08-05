@@ -107,37 +107,69 @@
     }
 </style>
 
-<div class="container py-5">
+<div class="py-5">
     <div class="row justify-content-center">
+        <div class="step-indicator mb-5">
+            <div class="progress-line">
+                <div class="progress-line-completed" style="width: 0%;"></div>
+            </div>
+            <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-title">Program Selection & Personal Information</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-title">Validate details</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-title">Finish</div>
+            </div>
+        </div>
         <div class="col-lg-10">
             <div class="card shadow">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-dark text-white rounded py-4">
                     <h2 class="h4 mb-0">Enrollment Registration</h2>
                 </div>
                 <div class="card-body p-4">
                     <!-- Step Indicator -->
-                    <div class="step-indicator mb-5">
-                        <div class="progress-line">
-                            <div class="progress-line-completed" style="width: 0%;"></div>
-                        </div>
-                        <div class="step active" data-step="1">
-                            <div class="step-number">1</div>
-                            <div class="step-title">Program Selection & Personal Information</div>
-                        </div>
-                        <div class="step" data-step="2">
-                            <div class="step-number">2</div>
-                            <div class="step-title">Validate details</div>
-                        </div>
-                        <div class="step" data-step="3">
-                            <div class="step-number">3</div>
-                            <div class="step-title">Finish</div>
-                        </div>
-                    </div> <!-- .step-indicator -->
+
                     <div class="alert alert-danger d-none bg-danger text-white" id="errorContainer"></div>
                     <!-- Reg Form -->
                     <form method="post" enctype="multipart/form-data" id="admission-form" class="needs-validation" novalidate>
                         <input type="hidden" name="step" id="step" class="form-control">
                         <div id="step1">
+                            <h3>Applicant Type</h3>
+                            <div class="mb-3">
+                                <label for="applicant_type" class="form-label">Type of applicant</label>
+                                <select name="applicant_type" id="applicant_type" class="form-select" required>
+                                    <option value="" selected disabled> --Select Course-- </option>
+                                    <option value="Freshmen">Freshmen</option>
+                                    <option value="Transferee">Transferee</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 d-none" id="year_level">
+                                <label for="transferee_yr_level" class="form-label">Year Level (Transferee)</label>
+                                <select name="transferee_yr_level" id="transferee_yr_level" class="form-select transferee_input" required>
+                                    <option value="" selected disabled> --Select Year Level-- </option>
+                                    <option value="First Year">First Year</option>
+                                    <option value="Second Year">Second Year</option>
+                                    <option value="Third Year">Third Year</option>
+                                    <option value="Fourth Year">Fourth Year</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sy" class="form-label">School Year</label>
+                                <select name="sy" id="sy" class="form-select" required>
+                                    <option value="" selected disabled> --Select School Year-- </option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="semester" class="form-label">Semester</label>
+                                <select name="semester" id="semester" class="form-select" required>
+                                    <option value="" selected disabled> --Select Semester-- </option>
+                                </select>
+                            </div>
                             <h3>Course Selection</h3>
                             <div class="mb-3">
                                 <label for="desired_course" class="form-label">Desired Course</label>
@@ -149,21 +181,20 @@
                             <div class="row">
                                 <div class="col-12 col-md-3 mb-3">
                                     <label for="firstname" class="form-label">Firstname</label>
-                                    <input type="text" name="firstname" id="firstname" class="form-control" required>
+                                    <input type="text" name="firstname" id="firstname" class="form-control no-numbers" placeholder="Enter your Firstname" required>
                                 </div>
                                 <div class="col-12 col-md-3 mb-3">
                                     <label for="middlename" class="form-label">Middlename</label>
-                                    <input type="text" name="middlename" id="middlename" class="form-control">
+                                    <input type="text" name="middlename" id="middlename" class="form-control no-numbers" placeholder="Enter your Middlename">
                                 </div>
                                 <div class="col-12 col-md-3 mb-3">
                                     <label for="lastname" class="form-label">Lastname</label>
-                                    <input type="text" name="lastname" id="lastname" class="form-control" required>
+                                    <input type="text" name="lastname" id="lastname" class="form-control no-numbers" placeholder="Enter your Lastname" required>
                                 </div>
                                 <div class="col-12 col-md-3 mb-3">
                                     <label for="suffix" class="form-label">Suffix</label>
-                                    <input type="text" name="suffix" id="suffix" class="form-control">
+                                    <input type="text" name="suffix" id="suffix" class="form-control no-numbers" placeholder="Enter your Suffix">
                                 </div>
-
                                 <div class="col-12 col-md-4 mb-3">
                                     <label for="gender" class="form-label">Gender</label>
                                     <select name="gender" id="gender" class="form-select" required>
@@ -192,28 +223,46 @@
                                     <label for="dob" class="form-label">Date of Birth</label>
                                     <input type="date" name="dob" id="dob" class="form-control" required>
                                 </div>
-                                <div class="col-12 col-md-6 mb-3">
+                                <div class="col-12 col-md-4 mb-3">
                                     <label for="address" class="form-label">Complete Address</label>
-                                    <input type="text" name="address" id="address" class="form-control" required>
+                                    <input type="text" name="address" id="address" class="form-control" placeholder="(Blk/Lot/Subdi/Ph/Barangay/City)" required>
                                 </div>
-                                <div class="col-12 col-md-6 mb-3">
+                                <div class="col-12 col-md-4 mb-3">
                                     <label for="email" class="form-label">Email Address</label>
-                                    <input type="email" name="email" id="email" class="form-control" required>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="example@gmail.com" required>
+                                </div>
+                                <div class="col-12 col-md-4 mb-3">
+                                    <label for="mobile_no" class="form-label">Mobile No</label>
+                                    <input type="text" name="mobile_no" id="mobile_no" class="form-control no-letters" maxlength="11" placeholder="09XXXXXXXXX" required>
                                 </div>
                             </div>
                             <h3>Educational Information</h3>
+                            <div id="transferee_school" class="d-none">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="transferee_prv_school" class="form-label">Previous School (Transferee)</label>
+                                        <input type="text" name="transferee_prv_school" id="transferee_prv_school" class="form-control transferee_input" required>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <label for="course_strand" class="form-label">Previous Course (Transferee)</label>
+                                        <input type="text" name="transferee_prv_course" id="transferee_prv_course" class="form-control transferee_input" required>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-12 col-md-4 mb-3">
                                     <label for="shs_school" class="form-label">Shs School</label>
-                                    <input type="text" name="shs_school" id="shs_school" class="form-control" required>
+                                    <select name="shs_school" id="shs_school" class="form-select" required>
+                                        <option value="" disabled selected> -- Select School --</option>
+                                    </select>
                                 </div>
                                 <div class="col-12 col-md-4 mb-3">
                                     <label for="year_graduated" class="form-label">Year Graduated</label>
                                     <input type="text" name="year_graduated" id="year_graduated" class="form-control" required>
                                 </div>
                                 <div class="col-12 col-md-4 mb-3">
-                                    <label for="course_strand" class="form-label">Course/Strand</label>
-                                    <input type="text" name="course_strand" id="course_strand" class="form-control" required>
+                                    <label for="strand" class="form-label">Strand</label>
+                                    <input type="text" name="strand" id="course_strand" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -230,10 +279,10 @@
                         <div class="d-none" id="step4">
                             <div class="d-flex flex-column">
                                 <h1 class="text-center">Successfully Submitted</h1>
-                                <p class="text-center">Your online applicated has been submitted you may proceed to next step of our admission</p>
+                                <p class="text-center">Your online application has been submitted you may proceed to next step of our admission</p>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center mt-5 gap-3">
+                        <div class="d-flex justify-content-between mt-5 gap-3">
                             <button type="button" class="btn btn-secondary d-none" id="backbtn">Back</button>
                             <button type="submit" class="btn btn-primary" id="nextBtn">Next</button>
                             <a href="index.php" class="btn btn-primary d-none" id="doneBtn">Done</a>
@@ -247,58 +296,6 @@
 
 <script>
     $(document).ready(function() {
-        // Current Step Value
-        let currentStep = 1;
-        const stepProgress = $('.step');
-        const step = $('#step');
-        step.val(currentStep);
-
-        // For Current Progress Highlighting
-        const highlightStep = (currentStep) => {
-            stepProgress.removeClass('active');
-            $('.step[data-step="' + (currentStep - 1) + '"]').addClass('completed');
-            $('.step[data-step="' + currentStep + '"]').addClass('active');
-        }
-
-        // For Displaying Data depending on the current step
-        const currentProgress = (currentStep) => {
-            if (currentStep === 1) {
-                $('#step1').removeClass('d-none');
-                $('#step2').addClass('d-none');
-                $('#backbtn').addClass('d-none');
-                $('.progress-line-completed').css('width', '0%');
-            } else if (currentStep === 2) {
-                $('#step1').addClass('d-none');
-                $('#step2').removeClass('d-none');
-                $('#step3').addClass('d-none');
-                $('#backbtn').removeClass('d-none');
-                $('.progress-line-completed').css('width', '18%');
-            } else if (currentStep === 3) {
-                $('#step2').addClass('d-none');
-                $('#step3').removeClass('d-none');
-                $('#step4').addClass('d-none');
-                $('#nextBtn').text('Submit');
-                $('.progress-line-completed').css('width', '50%');
-            } else if (currentStep === 4) {
-                $('#step3').addClass('d-none');
-                $('#step4').removeClass('d-none');
-                $('#backbtn').addClass('d-none');
-                $('#nextBtn').addClass('d-none');
-                $('#doneBtn').removeClass('d-none');
-                $('.progress-line-completed').css('width', '100%');
-            }
-        }
-
-        // Back Button
-        $('#backbtn').on('click', function() {
-            if (currentStep > 1) {
-                currentStep--;
-                step.val(currentStep);
-                highlightStep(currentStep);
-                currentProgress(currentStep);
-            }
-        });
-
         // For Displaying all the available course
         const fetchAvailableCourse = async () => {
             try {
@@ -323,71 +320,226 @@
 
         fetchAvailableCourse();
 
-        // For Validating Details in Step 2
-        const viewDetails = (desired_course, firstname, middlename, lastname, suffix, gender, nationality, dob, address, email, shs_school, year_graduated, course_strand) => `
-            <h3>Program Selected</h3>
-            <table class="table table-bordered">
-                <tr>
-                    <td><strong>Desired Course:</strong></td>
-                    <td>${$('#desired_course :selected').text()}</td>
-                </tr>
-            </table>
+        const fetchActiveSchoolYear = async () => {
+            try {
+                const response = await $.ajax({
+                    method: "GET",
+                    url: "../Actions/AcademicSettings.php?actionType=GetActiveSchoolYear",
+                    dataType: "json"
+                });
 
-            <h3>Personal Information</h3>
+                if (response.status === "success") {
+                    const school_year_selection = $('#sy');
+
+                    let school_year_options = $('<option></option>').val(response.data.id).text(response.data.SY);
+                    school_year_selection.append(school_year_options);
+
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchActiveSchoolYear();
+
+        const fetchActiveSemester = async () => {
+            try {
+                const response = await $.ajax({
+                    method: "GET",
+                    url: "../Actions/AcademicSettings.php?actionType=GetActiveSemester",
+                    dataType: "json"
+                });
+
+                if (response.status === "success") {
+                    const semester = $('#semester');
+                    //Refactor
+                    let semester_options = $('<option></option>').val(response.data.id).text(response.data.semester);
+                    semester.append(semester_options);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        $('#sy').on('change', function() {
+            fetchActiveSemester();
+        });
+
+        $('#applicant_type').on('change', function() {
+            if ($(this).val() === "Transferee") {
+                $('#year_level').removeClass('d-none');
+                $('#transferee_school').removeClass('d-none');
+            } else {
+                $('#year_level').addClass('d-none');
+                $('#transferee_school').addClass('d-none');
+                $('.transferee_input').val('');
+            }
+        });
+
+        $('#shs_school').select2({
+            theme: "bootstrap-5",
+            containerCssClass: "select2--large", // For Select2 v4.0
+            selectionCssClass: "select2--large", // For Select2 v4.1
+            dropdownCssClass: "select2--large",
+            width: "resolve"
+        });
+
+        const fetchShsSchools = async () => {
+            try {
+                const response = await $.ajax({
+                    method: "GET",
+                    url: "../json/senior_high_schools.json",
+                    dataType: "json"
+                });
+
+                response.sort((a, b) => {
+                    const nameA = a["SCHOOL NAME"].toLowerCase();
+                    const nameB = b["SCHOOL NAME"].toLowerCase();
+                    return nameA.localeCompare(nameB);
+                });
+                const shs_school_selection = $('#shs_school');
+                const options = response.map((item) => {
+                    let option = $('<option></option>').val(item["SCHOOL NAME"]).text(item["SCHOOL NAME"]);
+                    return option;
+                });
+                shs_school_selection.append(options);
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchShsSchools();
+        // Current Step Value
+        let currentStep = 1;
+        const stepProgress = $('.step');
+        const step = $('#step');
+        step.val(currentStep);
+
+        // For Current Progress Highlighting
+        const highlightStep = (currentStep) => {
+            stepProgress.removeClass('active');
+            $('.step[data-step="' + (currentStep - 1) + '"]').addClass('completed');
+            $('.step[data-step="' + currentStep + '"]').addClass('active');
+        }
+
+        // For Displaying Data depending on the current step
+        const currentProgress = (currentStep) => {
+            let totalSteps = 4;
+            let progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            if (currentStep === 1) {
+                $('#step1').removeClass('d-none');
+                $('#step2').addClass('d-none');
+                $('#backbtn').addClass('d-none');
+                $('#nextBtn').text('Next');
+                $('.progress-line-completed').css('width', `${progressPercent}%`);
+            } else if (currentStep === 2) {
+                $('#step1').addClass('d-none');
+                $('#step2').removeClass('d-none');
+                $('#step3').addClass('d-none');
+                $('#backbtn').removeClass('d-none');
+                $('#nextBtn').text('Next');
+                $('.progress-line-completed').css('width', `${progressPercent}%`);
+            } else if (currentStep === 3) {
+                $('#step2').addClass('d-none');
+                $('#step3').removeClass('d-none');
+                $('#step4').addClass('d-none');
+                $('#nextBtn').text('Submit');
+                $('.progress-line-completed').css('width', `${progressPercent}%`);
+            } else if (currentStep === 4) {
+                $('#step3').addClass('d-none');
+                $('#step4').removeClass('d-none');
+                $('#backbtn').addClass('d-none');
+                $('#nextBtn').addClass('d-none');
+                $('#doneBtn').removeClass('d-none');
+                $('.progress-line-completed').css('width', `${progressPercent}%`);
+            }
+        }
+
+        // Back Button
+        $('#backbtn').on('click', function() {
+            if (currentStep > 1) {
+                currentStep--;
+                step.val(currentStep);
+                highlightStep(currentStep);
+                currentProgress(currentStep);
+            }
+        });
+
+        // For Validating Details in Step 2
+        const viewDetails = (
+            desired_course,
+            firstname,
+            middlename,
+            lastname,
+            suffix,
+            gender,
+            nationality,
+            dob,
+            address,
+            email,
+            shs_school,
+            year_graduated,
+            course_strand,
+            applicant_type, // <-- add this
+            transferee_yr_level = '',
+            transferee_prv_school = '',
+            transferee_prv_course = ''
+        ) => {
+            let transfereeSection = '';
+
+            if (applicant_type === 'Transferee') {
+                transfereeSection = `
+            <h3>Transferee Details</h3>
             <table class="table table-bordered">
                 <tr>
-                    <td><strong>Firstname:</strong></td>
-                    <td>${firstname}</td>
+                    <td><strong>Year Level:</strong></td>
+                    <td>${transferee_yr_level}</td>
                 </tr>
                 <tr>
-                    <td><strong>Middlename:</strong></td>
-                    <td>${middlename}</td>
+                    <td><strong>Previous School:</strong></td>
+                    <td>${transferee_prv_school}</td>
                 </tr>
                 <tr>
-                    <td><strong>Lastname:</strong></td>
-                    <td>${lastname}</td>
-                </tr>
-                <tr>
-                    <td><strong>Gender:</strong></td>
-                    <td>${gender}</td>
-                </tr>
-                <tr>
-                    <td><strong>Suffix:</strong></td>
-                    <td>${suffix}</td>
-                </tr>
-                <tr>
-                    <td><strong>Nationality:</strong></td>
-                    <td>${nationality}</td>
-                </tr>
-                <tr>
-                    <td><strong>Birthdate:</strong></td>
-                    <td>${dob}</td>
-                </tr>
-                <tr>
-                    <td><strong>Address:</strong></td>
-                    <td>${address}</td>
-                </tr>
-                <tr>
-                    <td><strong>Email:</strong></td>
-                    <td>${email}</td>
-                </tr>
-            </table>
-            <h3>Educational Information</h3>
-            <table class="table table-bordered">
-                <tr>
-                    <td><strong>Shs School:</strong></td>
-                    <td>${shs_school}</td>
-                </tr>
-                <tr>
-                    <td><strong>Year Graduated:</strong></td>
-                    <td>${year_graduated}</td>
-                </tr>
-                <tr>
-                    <td><strong>Course/Strand:</strong></td>
-                    <td>${course_strand}</td>
+                    <td><strong>Previous Course:</strong></td>
+                    <td>${transferee_prv_course}</td>
                 </tr>
             </table>
         `;
+            }
+
+            return `
+        <h3>Program Selected</h3>
+        <table class="table table-bordered">
+            <tr>
+                <td><strong>Desired Course:</strong></td>
+                <td>${$('#desired_course :selected').text()}</td>
+            </tr>
+        </table>
+
+        <h3>Personal Information</h3>
+        <table class="table table-bordered">
+            <tr><td><strong>Firstname:</strong></td><td>${firstname}</td></tr>
+            <tr><td><strong>Middlename:</strong></td><td>${middlename}</td></tr>
+            <tr><td><strong>Lastname:</strong></td><td>${lastname}</td></tr>
+            <tr><td><strong>Gender:</strong></td><td>${gender}</td></tr>
+            <tr><td><strong>Suffix:</strong></td><td>${suffix}</td></tr>
+            <tr><td><strong>Nationality:</strong></td><td>${nationality}</td></tr>
+            <tr><td><strong>Birthdate:</strong></td><td>${dob}</td></tr>
+            <tr><td><strong>Address:</strong></td><td>${address}</td></tr>
+            <tr><td><strong>Email:</strong></td><td>${email}</td></tr>
+        </table>
+
+        ${transfereeSection}
+
+        <h3>Educational Information</h3>
+        <table class="table table-bordered">
+            <tr><td><strong>Shs School:</strong></td><td>${shs_school}</td></tr>
+            <tr><td><strong>Year Graduated:</strong></td><td>${year_graduated}</td></tr>
+            <tr><td><strong>Course/Strand:</strong></td><td>${course_strand}</td></tr>
+        </table>
+    `;
+        };
 
         // Bootstrap Form Validation
         (function() {
@@ -419,41 +571,77 @@
                 dataType: "json",
                 success: function(response) {
 
-                    console.log(response);
                     if (response.errors.length <= 0) {
                         if (currentStep < 5) {
                             currentStep++;
                             step.val(currentStep);
                         }
                     }
+                    // Refactor
+                    if (response.status === "error") {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Step Failed",
+                            text: response.message
+                        });
+                    }
+
                     highlightStep(currentStep);
                     currentProgress(currentStep);
+
+                    console.log(response);
                     if (currentStep === 2) {
                         const detailsContainer = $('#step2');
                         detailsContainer.empty();
-                        detailsContainer.append(viewDetails(response.data.desired_course, response.data.firstname, response.data.middlename, response.data.lastname, response.data.suffix, response.data.gender, response.data.nationality, response.data.dob, response.data.address, response.data.email, response.data.shs_school, response.data.year_graduated, response.data.course_strand));
+                        detailsContainer.append(viewDetails(response.data.desired_course,
+                            response.data.firstname,
+                            response.data.middlename,
+                            response.data.lastname,
+                            response.data.suffix,
+                            response.data.gender,
+                            response.data.nationality,
+                            response.data.dob,
+                            response.data.address,
+                            response.data.email,
+                            response.data.shs_school,
+                            response.data.year_graduated,
+                            response.data.strand,
+                            response.data.applicant_type,
+                            response.data.transferee_yr_level,
+                            response.data.transferee_prv_school,
+                            response.data.transferee_prv_course));
                     }
 
                     if (currentStep === 4) {
-                        if (response[0].status === "success") {
+                        if (response.status === "success") {
                             Swal.fire({
-                                icon: `${response[0].status}`,
+                                icon: `${response.status}`,
                                 title: 'Success',
-                                text: response[0].message
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: `${response[0].status}`,
-                                title: 'Failed',
-                                text: response[0].message
+                                text: response.message
                             });
                         }
+                        // else {
+                        //     Swal.fire({
+                        //         icon: `${response.status}`,
+                        //         title: 'Failed',
+                        //         text: response.message
+                        //     });
+                        // }
                     }
+
                 },
                 error: function(xhr) {
                     console.log(xhr.responseText)
                 }
             });
         });
+
+        $('.no-numbers').on('input', function() {
+            this.value = this.value.replace(/[^a-zA-Z\s\-'.]/g, '');
+        });
+        $('.no-letters').on('input', function() {
+            this.value = this.value.replace(/[^\d+]/g, '')
+        });
+
     });
 </script>

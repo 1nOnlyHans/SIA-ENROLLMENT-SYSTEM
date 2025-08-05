@@ -14,7 +14,7 @@ include "../includes/AdminSidebar.php";
                             <th>Department</th>
                             <th>Name</th>
                             <th>Status</th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="container"></tbody>

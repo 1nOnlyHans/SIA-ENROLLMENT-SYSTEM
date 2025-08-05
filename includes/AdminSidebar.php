@@ -12,18 +12,19 @@ include "../includes/sessionchecker.php";
     content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     name="viewport" />
   <?php
-    require "lib.php";
+    require_once "lib.php";
+    require_once "regQueue.php";
   ?>
 </head>
 
-<body class="bg-light">
+<body >
   <div class="wrapper">
     <!-- Sidebar -->
     <div class="sidebar sidebar-style-2">
       <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header bg-primary">
-          <p class="text-white h5">Admin Panel</p>
+          <p class="text-white h5 fw-bold">Enrollment System</p>
           <div class="nav-toggle">
             <button class="btn btn-toggle toggle-sidebar">
               <i class="gg-menu-right"></i>
@@ -38,7 +39,7 @@ include "../includes/sessionchecker.php";
         </div>
         <!-- End Logo Header -->
       </div>
-      <div class="sidebar-wrapper scrollbar scrollbar-inner bg-light">
+      <div class="sidebar-wrapper scrollbar scrollbar-inner bg-dark">
         <div class="sidebar-content">
           <ul class="nav nav-primary">
             <li class="nav-item">
@@ -49,13 +50,13 @@ include "../includes/sessionchecker.php";
             </li>
             <li class="nav-item">
               <a href="AdminUserManagement.php?page=UserManagement">
-                <i class="fa-solid fa-folder-open"></i>
+                <i class="fa-solid fa-user"></i>
                 <p>User Management</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="AdminDepartmentManagement.php?page=Department Management">
-                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-building"></i>
                 <p>Deparment Management</p>
               </a>
             </li>

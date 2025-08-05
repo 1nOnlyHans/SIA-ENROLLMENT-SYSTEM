@@ -13,6 +13,14 @@ class Department extends Dbh
     public function createDepartment($name, $code, $description)
     {
         // Add logic to insert a new department into the database
+
+        if (empty(trim($name)) || empty(trim($code)) || empty(trim($description))) {
+            return [
+                "status" => "error",
+                "message" => "Fill out the required fields!"
+            ];
+        }
+
         $departmentExists = $this->getDepartmentByCode($code);
 
         if ($departmentExists['status'] === "success") {

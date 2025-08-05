@@ -7,7 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
+  <?php
+    include "lib.php";
+  ?>
   <style>
     .navbar {
       transition: padding 0.3s ease;
@@ -53,7 +55,7 @@
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="#">
         <img src="../assets/ncst-logo.png" alt="NCST Logo" class="img-fluid">
-        <span class="text-warning fw-bold" style="-webkit-text-stroke: 0.5px white;">Enrollment Instruction</span>
+        <span class="text-warning fw-bold" style="-webkit-text-stroke: 0.5px white;">NCST Portal</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"

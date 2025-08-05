@@ -20,7 +20,7 @@
     .navbar {
       transition: padding-top 0.3s ease, top 0.3s ease;
       padding-top: 20px;
-      top: 40px;
+      /* top: 40px; */
     }
 
     .navbar.shrink {
@@ -54,17 +54,17 @@
 </head>
 <body class="text-white" style="background-image: url('../assets/ncst_bg.webp'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
 
-  <div class="bg-primary py-2">
+  <!-- <div class="bg-primary py-2">
     <div class="container text-center fw-bold">
       <marquee>Ang Estudyanteng Magaling sa NCST Galing! (Great students come from NCST!)</marquee>
     </div>
-  </div>
+  </div> -->
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-50 fixed-top w-100 z-3">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="#">
         <img src="../assets/ncst-logo.png" alt="NCST Logo" class="img-fluid" width="70" height="70">
-        <span class="text-warning fw-bold fs-2" style="-webkit-text-stroke: 0.5px white;">NCST Enrollment System</span>
+        <span class="text-warning fw-bold fs-2" style="-webkit-text-stroke: 0.5px white;">NCST Education System</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"

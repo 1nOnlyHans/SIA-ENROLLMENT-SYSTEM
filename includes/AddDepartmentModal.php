@@ -10,15 +10,15 @@
                     <input type="hidden" name="actionType" id="actionType" class="form-control" value="CreateDepartment">
                     <div class="mb-3">
                         <label for="department_name">Name</label>
-                        <input type="text" name="department_name" id="department_name" class="form-control" placeholder="Enter Department Name">
+                        <input type="text" name="department_name" id="department_name" class="form-control" placeholder="Enter Department Name" required>
                     </div>
                     <div class="mb-3">
                         <label for="department_code">Code</label>
-                        <input type="text" name="department_code" id="department_code" class="form-control" placeholder="Enter Department Code">
+                        <input type="text" name="department_code" id="department_code" class="form-control" placeholder="Enter Department Code" required>
                     </div>
                     <div class="mb-3">
                         <label for="department_description">Description</label>
-                        <textarea type="text" name="department_description" id="department_description" class="form-control" placeholder="Enter Department Name"></textarea>
+                        <textarea type="text" name="department_description" id="department_description" class="form-control" placeholder="Enter Department Description" required></textarea>
                     </div>
             </div>
             <div class="modal-footer">

@@ -83,6 +83,7 @@ include "../includes/AddCourseModal.php";
                         ],
                         destroy: true,
                         responsive: true,
+                        order: [],
                         lengthMenu: [
                             [5, 10, 25, 50, -1],
                             [5, 10, 25, 50, "All"]

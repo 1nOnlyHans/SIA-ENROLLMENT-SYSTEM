@@ -41,7 +41,7 @@
             try {
                 const response = await $.ajax({
                     method: "GET",
-                    url: "../Controllers/DepartmentController.php?actionType=GetAllDepartments",
+                    url: "../Actions/DepartmentController.php?actionType=GetAllDepartments",
                     dataType: "json",
                 });
                 console.log(response);

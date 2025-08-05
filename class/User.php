@@ -1,6 +1,5 @@
 <?php
 require "Dbh.php";
-require "../Helpers/InputValidator.php";
 
 class User extends Dbh
 {
@@ -9,7 +8,6 @@ class User extends Dbh
     public function __construct()
     {
         $this->db = $this->Connect();
-        $this->inputValidator = new InputValidator();
     }
 
     public function isUsernameExists($username)
