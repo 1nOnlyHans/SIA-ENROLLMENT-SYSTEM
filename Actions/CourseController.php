@@ -16,7 +16,7 @@ switch ($actionType) {
     case 'CreateCourse':
         if ($requestMethod === "POST") {
             $department_id = InputHandler::sanitize_int($_POST['department_id'] ?? '');
-            $course_code = InputHandler::sanitize_string($_POST['course_code'] ?? '');
+            $course_code = InputHandler::sanitize_string(strtoupper($_POST['course_code'] ?? ''));
             $course_name = InputHandler::sanitize_name($_POST['course_name'] ?? '');
             $course_description = InputHandler::sanitize_string($_POST['course_description'] ?? '');
             $response = $action->createCourse($department_id, $course_code, $course_name, $course_description);
@@ -42,7 +42,7 @@ switch ($actionType) {
         if ($requestMethod === "POST") {
             $course_id = InputHandler::sanitize_int($_POST['course_id'] ?? '');
             $department_id = InputHandler::sanitize_int($_POST['department_id'] ?? '');
-            $course_code = InputHandler::sanitize_string($_POST['course_code'] ?? '');
+            $course_code =  InputHandler::sanitize_string(strtoupper($_POST['course_code'] ?? ''));
             $course_name = InputHandler::sanitize_name($_POST['course_name'] ?? '');
             $course_description = InputHandler::sanitize_string($_POST['course_description'] ?? '');
             $response = $action->updateCourse($course_id, $department_id, $course_code, $course_name, $course_description);

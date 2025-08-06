@@ -80,6 +80,11 @@ switch ($step) {
             }
 
             $errors = $applicant->checkRequiredFields(array_values($requiredFields), $inputs);
+            $checkNameValidity = $applicant->checkNameLength($inputs['firstname'], $inputs['lastname']);
+
+            if (!$checkNameValidity) {
+                array_push($errors, 'Invalid name inputs');
+            }
 
             if (!empty(trim($inputs['dob']))) {
                 if (!$applicant->checkAgeValidity($inputs['dob'])) {
@@ -94,14 +99,7 @@ switch ($step) {
         $message = "";
 
         if (count($errors) > 0) {
-            $message = "Fill out the required fields";
-            if (count($errors) === 1) {
-                if (in_array('The applicant must be at least 17 years old', $errors)) {
-                    $message = 'The applicant must be at least 17 years old';
-                }
-            }
-        } else {
-            $message = "";
+            $message = "Fill the required fields properly";
         }
 
         $response = [

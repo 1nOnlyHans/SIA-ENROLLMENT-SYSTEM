@@ -15,7 +15,7 @@ include "../includes/AdminSidebar.php";
                             <th class="text-center">Subject Code</th>
                             <th class="text-center">Subject Name</th>
                             <th class="text-center">Pre Requisite</th>
-                            <th class="text-center">Units</th>
+                            <th class="text-center">Total Units</th>
                             <th class="text-center">Type</th>
                             <th class="text-center">Year Level</th>
                             <th class="text-center">Semester</th>
@@ -58,8 +58,12 @@ include "../includes/AddSubjectModal.php";
                                 class: "text-center"
                             },
                             {
-                                data: "subject_name",
-                                class: "text-center"
+                                data: null,
+                                class: "text-center",
+                                render: function(data, type, row) {
+                                    let subject_name = data.subject_name.length > 25 ? data.subject_name.slice(0, 25) + '...' : data.subject_name;
+                                    return subject_name;
+                                }
                             },
                             {
                                 data: null,
@@ -69,11 +73,11 @@ include "../includes/AddSubjectModal.php";
                                 }
                             },
                             {
-                                data: "units",
+                                data: "total_units",
                                 class: "text-center"
                             },
                             {
-                                data: "types",
+                                data: "type",
                                 class: "text-center"
                             },
                             {
@@ -93,16 +97,16 @@ include "../includes/AddSubjectModal.php";
                                 class: "text-center",
                                 render: function(data, type, row) {
                                     return `
-                                        <div>
-                                            <button type="button" class="btn btn-dark" data-id="${data.id}">View</button>
+                                        <div class="d-flex justify-content-center align-content-center">
+                                            <a class="btn btn-dark" href="AdminSubjectDetails.php?page=${data.subject_name} Details&subject_id=${data.id}"">View</a>
                                         </div>
                                     `;
                                 }
                             }
                         ],
-                        // rowGroup: {
-                        //     dataSrc: ['type']
-                        // },
+                        rowGroup: {
+                            dataSrc: ['course_code']
+                        },
                         destroy: true,
                         responsive: true,
                         order: [],

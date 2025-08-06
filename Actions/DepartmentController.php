@@ -18,7 +18,7 @@ switch ($actionType) {
     case 'CreateDepartment':
         if ($requestMethod === "POST") {
             $department_name = InputHandler::sanitize_name($_POST['department_name'] ?? '');
-            $department_code = InputHandler::sanitize_string($_POST['department_code'] ?? '');
+            $department_code = InputHandler::sanitize_string(strtoupper($_POST['department_code'] ?? ''));
             $department_description = InputHandler::sanitize_string($_POST['department_description'] ?? '');
             $response = $action->createDepartment($department_name, $department_code, $department_description);
         }
@@ -38,7 +38,7 @@ switch ($actionType) {
         if ($requestMethod === "POST") {
             $id = InputHandler::sanitize_int($_POST['department_id'] ?? '');
             $department_name = InputHandler::sanitize_name($_POST['department_name'] ?? '');
-            $department_code = InputHandler::sanitize_string($_POST['department_code'] ?? '');
+            $department_code = InputHandler::sanitize_string(strtoupper($_POST['department_code'] ?? ''));
             $department_description = InputHandler::sanitize_string($_POST['department_description'] ?? '');
             $response = $action->updateDepartment($id, $department_name, $department_code, $department_description);
         }

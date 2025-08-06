@@ -47,12 +47,20 @@ include "../includes/AddDepartmentModal.php";
                                 class: "text-center"
                             },
                             {
-                                data: "department_name",
-                                class: "text-center"
+                                data: null,
+                                class: "text-center",
+                                render: function(data, type, row) {
+                                    let department_name = data.department_name.length > 25 ? data.department_name.slice(0, 25) + '...' : data.department_name;
+                                    return department_name;
+                                }
                             },
                             {
-                                data: "department_description",
-                                class: "text-center"
+                                data: null,
+                                class: "text-center",
+                                render: function(data, type, row) {
+                                    let description = data.department_description.length > 40 ? data.department_description.slice(0, 25) + '...' : data.department_description;
+                                    return description;
+                                }
                             },
                             {
                                 data: null,

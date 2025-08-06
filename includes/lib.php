@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="../node_modules/datatables.net-dt/css/dataTables.dataTables.css">
 <link rel="stylesheet" href="../node_modules/datatables.net-buttons-dt/css/buttons.dataTables.css">
 <link rel="stylesheet" href="../node_modules/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css">
+<link rel="stylesheet" href="../node_modules/datatables.net-responsive-dt/css/responsive.dataTables.min.css">
 <script src="../node_modules/datatables.net/js/dataTables.js"></script>
 <script src="../node_modules/datatables.net-buttons-dt/js/buttons.dataTables.js"></script>
 <script src="../node_modules/datatables.net-buttons/js/dataTables.buttons.js"></script>
@@ -27,6 +28,7 @@
 <script src="../node_modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
 <script src="../node_modules/datatables.net-buttons/js/buttons.print.min.js"></script>
 <script src="../node_modules/datatables.net-rowgroup/js/dataTables.rowGroup.min.js"></script>
+<script src="../node_modules/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
 <!-- SELECT 2 -->
 <link rel="stylesheet" href="../node_modules/select2/dist/css/select2.min.css">
 <link rel="stylesheet" href="../node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css">

@@ -12,14 +12,6 @@ class Admission
     public function saveApplicantInformations($applicant_type, $desired_course, $firstname, $middlename, $lastname, $suffix, $address, $email, $mobile_no, $gender, $nationality, $dob, $transferee_yr_level, $transferee_prv_school, $transferee_prv_course, $shs_school, $year_graduated, $strand, $sy, $semester)
     {
         try {
-            $isApplicantExists = $this->checkIfAlreadySubmitted($firstname, $lastname, $email);
-            if ($isApplicantExists['status'] === "success") {
-                return [
-                    "status" => "error",
-                    "message" => "Applicant already submitted"
-                ];
-            }
-
             $stmt = $this->db->prepare("INSERT INTO applicants (applicant_type,desired_course,firstname,middlename,lastname,suffix,address,email,mobile_no,gender,nationality,dob,transferee_yr_level,transferee_prv_school,transferee_prv_course,shs_school,year_graduated,strand,sy,semester) VALUES (
                 :applicant_type,
                 :desired_course,

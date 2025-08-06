@@ -42,6 +42,8 @@
         <?php
         include "../includes/AdmissionForm.php";
         ?>
+
+        <div id="errorContainer"></div>
     </div>
 
 

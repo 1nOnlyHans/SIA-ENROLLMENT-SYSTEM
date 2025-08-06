@@ -17,12 +17,15 @@ class Applicant extends Dbh
     {
         try {
             $this->db->beginTransaction();
+            $isApplicantExists = $this->admission->checkIfAlreadySubmitted($firstname, $lastname, $email);
+            if ($isApplicantExists['status'] === "success") {
+                return [
+                    "status" => "error",
+                    "message" => "Applicant already submitted"
+                ];
+            }
 
             $action = $this->admission->saveApplicantInformations($applicant_type, $desired_course, $firstname, $middlename, $lastname, $suffix, $address, $email, $mobile_no, $gender, $nationality, $dob, $transferee_yr_level, $transferee_prv_school, $transferee_prv_course, $shs_school, $year_graduated, $strand, $sy, $semester);
-
-            if ($action['status'] === "error") {
-                return $action;
-            }
 
             if (!$action) {
                 $this->db->rollBack();
@@ -54,6 +57,11 @@ class Applicant extends Dbh
         }
 
         return $errors;
+    }
+
+    public function checkNameLength($firstname, $lastname)
+    {
+        return strlen($firstname) > 2 && strlen($lastname) > 2;
     }
 
     public function checkAgeValidity($dob)

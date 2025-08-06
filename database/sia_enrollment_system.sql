@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2025 at 11:16 AM
+-- Generation Time: Aug 06, 2025 at 02:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,11 +58,8 @@ CREATE TABLE `applicants` (
 --
 
 INSERT INTO `applicants` (`id`, `applicant_type`, `desired_course`, `firstname`, `middlename`, `lastname`, `suffix`, `address`, `email`, `mobile_no`, `gender`, `nationality`, `dob`, `transferee_yr_level`, `transferee_prv_school`, `transferee_prv_course`, `shs_school`, `year_graduated`, `strand`, `sy`, `semester`, `status`, `register_at`) VALUES
-(1, 'Freshmen', 1, 'Hans Andrei', 'Ang', 'Diaz', '', 'Blk 1 Lot 1 Wano Kuni Ph 3 Trece Martires Cavite', 'hansNigga@gmail.com', '09123456789', 'Male', 'Filipino', '2005-06-20', '', '', '', 'Gateway Integrated School of Science &amp;amp; Technology, Inc.', '2023', 'General Acadmic Strand', 1, '1st', 'Pending', '2025-08-04'),
-(2, 'Freshmen', 4, 'Yuli', 'Martena Kirkland', 'Williamson', 'Sed Sint Nam Neque N', 'Ad enim reprehenderi', 'cytyjajiri@mailinator.com', '09123456789', 'Male', 'Korean', '2007-02-27', '', '', '', 'Sophia School, Inc.', '2001', 'Molestias hic in cor', 1, '1st', 'Pending', '2025-08-04'),
-(3, 'Freshmen', 1, 'Samuel', 'Tashya Spears', 'Dickerson', '', 'Laboriosam expedita', 'jojofimyv@mailinator.com', '09672490140', 'Male', 'Filipino', '2003-06-20', '', '', '', 'STI College - Dasmariñas', '2023', 'General Acadmic Strand', 1, '1st', 'Pending', '2025-08-04'),
-(4, 'Freshmen', 1, 'Mayor', '', 'Diaz', '', 'Blk 1 Lot 1 Wano Kuni Ph 3 Trece Martires Cavite', 'mayor@gmail.com', '09123456789', 'Male', 'Filipino', '2005-06-20', '', '', '', 'STI College - Dasmariñas', '2023', 'General Acadmic Strand', 1, '1st', 'Pending', '2025-08-04'),
-(5, 'Transferee', 3, 'Bernard', 'Nathaniel Pate', 'Hansen', '', 'Eveniet adipisicing', 'wicike@mailinator.com', '09123456789', 'Male', 'Filipino', '2006-07-20', '', 'qweqeqeqeqeqe', 'General Acadmic Strand', '4A School of Excellence, Inc.', '2023', 'General Acadmic Strand', 1, '1st', 'Pending', '2025-08-04');
+(1, 'Freshmen', 2, 'Hans Andrei', 'Ang', 'Diaz', '', 'Blk 1 Lot 1 Wano Kuni Ph 3 Trece Martires Cavite', 'hansNigga@gmail.com', '09123456789', 'Male', 'Filipino', '2005-06-20', '', '', '', '4th Watch Maranatha Christian Academy of Makati', '2023', 'GAS', 1, '1st', 'Pending', '2025-08-06'),
+(2, 'Freshmen', 2, 'Bernard', 'Nathaniel Pate', 'Hansen', 'Jr', 'Eveniet adipisicing', 'wicike@mailinator.com', '09123456789', 'Male', 'Filipino', '2005-07-20', '', '', '', '4th Watch Maranatha Christian Academy of Makati', '2023', 'GAS', 1, '1st', 'Pending', '2025-08-06');
 
 -- --------------------------------------------------------
 
@@ -85,12 +82,8 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `department_id`, `course_code`, `course_name`, `course_description`, `status`, `created_at`) VALUES
-(1, 1, 'BSIT', 'Bachelor Of Science In Information Technologies', 'The Bachelor Of Science In Information Technology Bs It Is A Four-year Degree Program That Focuses On The Study Of Computer Utilization And Computer Software To Plan Install Customize Operate Manage Administer And Maintain Information Technology Infrastructure.', 'Active', '2025-07-22'),
-(2, 2, 'BSCE', 'Bachelor Of Science In Computer Engineering', 'Computers And Computation', 'Active', '2025-07-22'),
-(3, 1, 'BSCS', 'Bachelor Of Science In Computer Science', 'BSCS Stands For Bachelor Of Science In Computer Science. It Is The First Professional Degree That Aims To Produce Undergraduates For The Job Market As Software Engineers, Information Technology Administrators, Entrepreneurs, Academia Professionals, And Many Others.', 'Active', '2025-07-22'),
-(4, 1, 'BSED', 'Bachelor Of Science In Basic Education', 'Basic Education', 'Active', '2025-07-26'),
-(5, 1, 'qweqe', 'Qeqeq', 'Eqeqe', 'Active', '2025-08-03'),
-(6, 2, 'BSTITE', 'Wawawawa', 'Qweqwe', 'Active', '2025-08-04');
+(2, 2, 'BSIT', 'Bs Information Technology', 'w', 'Active', '2025-08-06'),
+(3, 2, 'BSCS', 'Bs In Computer Science', 'w', 'Active', '2025-08-06');
 
 -- --------------------------------------------------------
 
@@ -112,13 +105,7 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`id`, `department_name`, `department_code`, `department_description`, `status`, `added_at`) VALUES
-(1, 'Computer Studies Department', 'CSD', 'All About The Computers And Shiii..', 'Active', '2025-07-21'),
-(2, 'Engineering Department', 'ED', 'All About computations', 'Active', '2025-07-22'),
-(3, 'General Education', 'GE', 'eqweqeqeqeq', 'Archived', '2025-07-22'),
-(4, 'General Education', 'GED', 'General Education Department Is All About Studying', 'Active', '2025-07-22'),
-(5, 'Qqweqeqeq', 'Eqeqeq', 'Eqeqe', 'Archived', '2025-07-23'),
-(6, 'Qweqeqe', 'Qeqq', 'Eqee', 'Archived', '2025-07-24'),
-(7, 'WAHHHHHHHH', 'YAWA', 'BOLD', 'Active', '2025-08-03');
+(2, 'Computer Studies Department', 'CSD', 'w', 'Active', '2025-08-06');
 
 -- --------------------------------------------------------
 
@@ -157,8 +144,7 @@ CREATE TABLE `semesters` (
 --
 
 INSERT INTO `semesters` (`id`, `SY`, `semester`, `status`) VALUES
-(1, 1, '1st', 'Active'),
-(2, 1, '2nd', 'Inactive');
+(1, 1, '1st', 'Active');
 
 -- --------------------------------------------------------
 
@@ -172,9 +158,13 @@ CREATE TABLE `subjects` (
   `subject_code` varchar(50) NOT NULL,
   `subject_name` varchar(255) NOT NULL,
   `pre_requisite` varchar(255) NOT NULL,
-  `units` decimal(10,2) NOT NULL,
+  `lab_units` decimal(10,2) NOT NULL,
+  `lec_units` decimal(10,2) NOT NULL,
+  `total_units` decimal(10,2) NOT NULL,
+  `type` set('Lab','Lec','','') NOT NULL,
   `year_lvl` enum('1','2','3','4') NOT NULL,
   `semester` enum('1','2','','') NOT NULL,
+  `status` enum('Active','Inactive','','') NOT NULL DEFAULT 'Active',
   `added_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -182,10 +172,12 @@ CREATE TABLE `subjects` (
 -- Dumping data for table `subjects`
 --
 
-INSERT INTO `subjects` (`id`, `course_id`, `subject_code`, `subject_name`, `pre_requisite`, `units`, `year_lvl`, `semester`, `added_at`) VALUES
-(1, 1, 'IT 101', 'Computer Programming 1', '', 3.00, '1', '1', '2025-08-05'),
-(2, 1, 'IT 201', 'Computer Programming 2', 'IT 101', 3.00, '2', '1', '2025-08-05'),
-(3, 3, 'CS 101', 'Introduction to Programming', '', 3.00, '1', '1', '2025-08-05');
+INSERT INTO `subjects` (`id`, `course_id`, `subject_code`, `subject_name`, `pre_requisite`, `lab_units`, `lec_units`, `total_units`, `type`, `year_lvl`, `semester`, `status`, `added_at`) VALUES
+(1, 2, 'IT 101', 'Computer Programming 1', '', 3.00, 1.00, 4.00, 'Lab,Lec', '1', '1', 'Active', '2025-08-06'),
+(2, 3, 'CS 101', 'Introduction To Programming', '', 2.00, 1.00, 3.00, 'Lab,Lec', '1', '1', 'Active', '2025-08-06'),
+(3, 2, 'IT 201', 'Computer Programming 2', 'IT 101', 3.00, 1.00, 4.00, 'Lab,Lec', '2', '1', 'Active', '2025-08-06'),
+(4, 2, 'IT 103', 'Networking 1', '', 3.00, 1.00, 4.00, 'Lab,Lec', '1', '2', 'Active', '2025-08-06'),
+(5, 2, 'IT 204', 'Networking 2', 'IT 103', 3.00, 1.00, 4.00, 'Lab,Lec', '2', '2', 'Active', '2025-08-06');
 
 -- --------------------------------------------------------
 
@@ -227,7 +219,7 @@ ALTER TABLE `applicants`
 --
 ALTER TABLE `courses`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `department_id` (`department_id`);
+  ADD KEY `courses_ibfk_1` (`department_id`);
 
 --
 -- Indexes for table `departments`
@@ -269,19 +261,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applicants`
 --
 ALTER TABLE `applicants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `school_year`
@@ -293,13 +285,13 @@ ALTER TABLE `school_year`
 -- AUTO_INCREMENT for table `semesters`
 --
 ALTER TABLE `semesters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -321,7 +313,7 @@ ALTER TABLE `applicants`
 -- Constraints for table `courses`
 --
 ALTER TABLE `courses`
-  ADD CONSTRAINT `courses_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`);
+  ADD CONSTRAINT `courses_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `semesters`

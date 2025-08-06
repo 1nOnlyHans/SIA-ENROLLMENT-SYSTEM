@@ -16,11 +16,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="subject_code" class="form-label">Subject Code</label>
-                        <input type="text" name="subject_code" id="subject_code" class="form-control" placeholder="Enter Subject Code">
+                        <input type="text" name="subject_code" id="subject_code" class="form-control" placeholder="Enter Subject Code" required>
                     </div>
                     <div class="mb-3">
                         <label for="subject_name" class="form-label">Subject Title</label>
-                        <input type="text" name="subject_name" id="subject_name" class="form-control" placeholder="Enter Subject Title">
+                        <input type="text" name="subject_name" id="subject_name" class="form-control" placeholder="Enter Subject Title" required>
                     </div>
                     <div class="mb-3">
                         <label for="pre_requisite" class="form-label">Pre Requisite</label>
@@ -29,16 +29,20 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="units" class="form-label">Number of Units</label>
-                        <input type="number" name="units" id="units" class="form-control" placeholder="Enter Units">
-                    </div>
-                    <div class="mb-3">
                         <label for="units" class="form-label">Type</label>
                         <select name="type[]" id="type" class="form-select" multiple required>
                             <option value="" disabled selected> --Select Subject Course--</option>
                             <option value="Lab">Laboratory</option>
                             <option value="Lec">Lecture</option>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lab_units" class="form-label">Number of Laboratory Units</label>
+                        <input type="number" name="lab_units" id="lab_units" class="form-control units" placeholder="ex. 3" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lec_units" class="form-label">Number of Lecture Units</label>
+                        <input type="number" name="lec_units" id="lec_units" class="form-control units" placeholder="ex. 3" disabled>
                     </div>
                     <div class="mb-3">
                         <label for="year_lvl" class="form-label">Year Level</label>
@@ -111,6 +115,8 @@
                         return option;
                     });
                     const select = $('#pre_requisite');
+                    select.empty();
+                    select.append('<option value="" disabled selected> -- Select Subject Pre-Requisite --</option>');
                     select.append(options);
                 }
             } catch (error) {
@@ -120,6 +126,25 @@
 
         $('#course_id').on('change', function() {
             fetchAllSubjectByCourse();
+        });
+
+        $('#type').on('change', function() {
+            const selectedVal = $(this).val();
+            if (selectedVal && selectedVal.includes("Lab")) {
+                $('#lab_units').removeAttr('disabled');
+            } else {
+                $('#lab_units').val('');
+                $('#lab_units').prop('disabled', true);
+                $('#lab_units').prop('required', true);
+            }
+
+            if (selectedVal && selectedVal.includes("Lec")) {
+                $('#lec_units').removeAttr('disabled');
+            } else {
+                $('#lec_units').val('');
+                $('#lec_units').prop('disabled', true);
+                $('#lec_units').prop('required', true);
+            }
         });
     });
 </script>

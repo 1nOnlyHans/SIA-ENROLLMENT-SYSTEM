@@ -51,12 +51,20 @@ include "../includes/AddCourseModal.php";
                                 class: "text-center"
                             },
                             {
-                                data: "course_name",
-                                class: "text-center"
+                                data: null,
+                                class: "text-center",
+                                render: function(data, type, row) {
+                                    let course_name = data.course_name.length > 25 ? data.course_name.slice(0, 25) + '...' : data.course_name;
+                                    return course_name;
+                                }
                             },
                             {
-                                data: "course_description",
-                                class: "text-center"
+                                data: null,
+                                class: "text-center",
+                                render: function(data, type, row) {
+                                    let description = data.course_description.length > 40 ? data.course_description.slice(0, 25) + '...' : data.course_description;
+                                    return description;
+                                }
                             },
                             {
                                 data: null,

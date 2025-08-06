@@ -245,7 +245,7 @@
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <label for="course_strand" class="form-label">Previous Course (Transferee)</label>
-                                        <input type="text" name="transferee_prv_course" id="transferee_prv_course" class="form-control transferee_input" required>
+                                        <input type="text" name="transferee_prv_course" id="transferee_prv_course" class="form-control transferee_input no-numbers" required>
                                     </div>
                                 </div>
                             </div>
@@ -258,11 +258,13 @@
                                 </div>
                                 <div class="col-12 col-md-4 mb-3">
                                     <label for="year_graduated" class="form-label">Year Graduated</label>
-                                    <input type="text" name="year_graduated" id="year_graduated" class="form-control" required>
+                                    <input type="text" name="year_graduated" id="year_graduated" class="form-control no-letters" maxlength="4" required>
                                 </div>
                                 <div class="col-12 col-md-4 mb-3">
                                     <label for="strand" class="form-label">Strand</label>
-                                    <input type="text" name="strand" id="course_strand" class="form-control" required>
+                                    <select name="strand" id="strand" class="form-select form-select-lg" required>
+                                        <option value="" disabled selected> -- Select Strand --</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -327,13 +329,13 @@
                     url: "../Actions/AcademicSettings.php?actionType=GetActiveSchoolYear",
                     dataType: "json"
                 });
-
+                console.log(response);
                 if (response.status === "success") {
                     const school_year_selection = $('#sy');
 
                     let school_year_options = $('<option></option>').val(response.data.id).text(response.data.SY);
-                    school_year_selection.append(school_year_options);
 
+                    school_year_selection.append(response.data !== false ? school_year_options : $('<option></option>').val("").text("No Active School Year"));
                 }
             } catch (error) {
                 console.log(error);
@@ -363,6 +365,10 @@
 
         $('#sy').on('change', function() {
             fetchActiveSemester();
+        });
+
+        $('#shs_school').on('change', function() {
+            fetchAvailableStrands();
         });
 
         $('#applicant_type').on('change', function() {
@@ -402,14 +408,43 @@
                     let option = $('<option></option>').val(item["SCHOOL NAME"]).text(item["SCHOOL NAME"]);
                     return option;
                 });
-                shs_school_selection.append(options);
 
+                shs_school_selection.append(options);
             } catch (error) {
                 console.log(error);
             }
         }
 
         fetchShsSchools();
+
+        const fetchAvailableStrands = async () => {
+            try {
+                const response = await $.ajax({
+                    method: "GET",
+                    url: "../json/senior_high_schools.json",
+                    dataType: "json"
+                });
+                const strand = $('#strand');
+                const selectedSchool = response.filter(strand => {
+                    return strand['SCHOOL NAME'] === $('#shs_school').val();
+                });
+                const availableStrands = selectedSchool.flatMap((item) => item['PROGRAM OFFERINGS'].split('|'));
+                availableStrands.sort((a, b) => {
+                    const strandA = a;
+                    const strandB = b;
+                    return a.localeCompare(b);
+                });
+                const options = availableStrands.map((item) => {
+                    let option = $('<option></option>').val(item).text(item);
+                    return option;
+                });
+                strand.empty();
+                strand.append('<option value="" disabled selected>-- Select Strand --</option>');
+                strand.append(options);
+            } catch (error) {
+                console.log(error);
+            }
+        }
         // Current Step Value
         let currentStep = 1;
         const stepProgress = $('.step');
@@ -570,13 +605,25 @@
                 data: formData,
                 dataType: "json",
                 success: function(response) {
-
+                    console.log(response);
                     if (response.errors.length <= 0) {
                         if (currentStep < 5) {
                             currentStep++;
                             step.val(currentStep);
                         }
                     }
+                    // else {
+                    //     const errors = response.errors.map((error) => `
+                    //         <p class="text-white">
+                    //             ${error}
+                    //         </p>
+                    //     `).join("");
+
+                    //     const errorContainer = $('#errorContainer');
+                    //     errorContainer.empty();
+                    //     errorContainer.removeClass('d-none');
+                    //     errorContainer.append(errors);
+                    // }
                     // Refactor
                     if (response.status === "error") {
                         Swal.fire({
@@ -620,13 +667,6 @@
                                 text: response.message
                             });
                         }
-                        // else {
-                        //     Swal.fire({
-                        //         icon: `${response.status}`,
-                        //         title: 'Failed',
-                        //         text: response.message
-                        //     });
-                        // }
                     }
 
                 },
@@ -639,9 +679,26 @@
         $('.no-numbers').on('input', function() {
             this.value = this.value.replace(/[^a-zA-Z\s\-'.]/g, '');
         });
+
         $('.no-letters').on('input', function() {
             this.value = this.value.replace(/[^\d+]/g, '')
         });
+
+        // $('#firstname').on('input', function() {
+        //     $(this).val().length <= 1 ? $(this).addClass('is-invalid') : $(this).removeClass('is-invalid')
+        // });
+
+        // $('#dob').on('input', function() {
+        //     const currentDate = new Date();
+        //     const dob = new Date($(this).val());
+        //     let age = currentDate.getFullYear() - dob.getFullYear();
+
+        //     if (age < 17) {
+        //         $(this).addClass('is-invalid');
+        //     } else {
+        //         $(this).addClass('is-valid');
+        //     }
+        // });
 
     });
 </script>
