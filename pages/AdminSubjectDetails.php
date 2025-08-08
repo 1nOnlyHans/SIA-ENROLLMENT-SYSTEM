@@ -83,15 +83,15 @@ include "../includes/AdminSidebar.php";
 
                                 <div class="col-md-6">
                                     <label for="pre_requisite" class="form-label fw-bold">Subject Pre requisite:</label>
-                                    <select name="pre_requisite" id="pre_requisite" class="form-select">
-                                        <option value="" disabled selected> --Select Pre-requisite --</option>
+                                    <select name="pre_requisite[]" id="pre_requisite" class="form-select" multiple>
+                                        <option value=""> --Select Pre-requisite --</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="type" class="form-label fw-bold">Subject Type:</label>
                                     <select name="type[]" id="type" class="form-select" multiple required>
-                                        <option value="" disabled selected> --Select Subject Type--</option>
+                                        <option value=""> --Select Subject Type--</option>
                                         <option value="Lab">Laboratory</option>
                                         <option value="Lec">Lecture</option>
                                     </select>
@@ -145,6 +145,10 @@ include "../includes/AdminSidebar.php";
         let urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get('subject_id');
 
+        // ==============================
+        // FETCH FUNCTIONS
+        // ==============================
+
         const fetchAllCourse = async () => {
             try {
                 const response = await $.ajax({
@@ -152,11 +156,13 @@ include "../includes/AdminSidebar.php";
                     url: "../Actions/CourseController.php?actionType=GetAllCourse",
                     dataType: "json"
                 });
+
                 if (response.status === "success") {
                     const select = $('#course_id');
                     select.empty();
+
                     let options = response.data.map((data) => {
-                        let option = $('<option></option>').val(data.id).text(data.course_name)
+                        let option = $('<option></option>').val(data.id).text(data.course_name);
                         return option;
                     });
 
@@ -165,12 +171,11 @@ include "../includes/AdminSidebar.php";
             } catch (error) {
                 console.log(error);
             }
-        }
-
-        fetchAllCourse();
+        };
 
         const fetchAllSubjectByCourse = async () => {
             var course_id = $('#course_id').val();
+
             try {
                 const response = await $.ajax({
                     method: "POST",
@@ -181,22 +186,65 @@ include "../includes/AdminSidebar.php";
                     },
                     dataType: "json"
                 });
+
                 console.log(response);
+
                 if (response.status === "success") {
                     const select = $('#pre_requisite');
+                    select.empty();
                     let options = response.data.map((data) => {
-                        let option = $('<option></option>').val(data.subject_code).text(data.subject_name)
+                        let option = $('<option></option>').val(data.subject_code).text(data.subject_name);
                         return option;
                     });
+
                     select.append(options);
                 }
             } catch (error) {
                 console.log(error);
             }
-        }
+        };
+
+        const fetchSubject = async () => {
+            try {
+                const response = await $.ajax({
+                    method: "POST",
+                    url: "../Actions/Subject.php",
+                    data: {
+                        actionType: "GetSubjectById",
+                        subject_id: id
+                    },
+                    dataType: "json"
+                });
+
+                console.log(response);
+
+                if (response.status === "success") {
+                    await fetchAllSubjectByCourse();
+                    setValue(response.data);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        // ==============================
+        // HELPERS
+        // ==============================
+
+        const setSelectedSubjectType = (type) => {
+            const selectedType = type.split(',');
+            return selectedType;
+        };
+
+        const setSelectedPre_requisites = (subject) => {
+            const selectedSubject = subject.split(',');
+            return selectedSubject;
+        };
 
         const setValue = (data) => {
             const selectedType = setSelectedSubjectType(data.type);
+            const selectedSubject = setSelectedPre_requisites(data.pre_requisite);
+
             $('#title').text(data.subject_name + " " + "(" + data.subject_code + ")");
             $('#subject_id').val(data.id);
             $('#view-course-name').text(data.course_name);
@@ -210,10 +258,11 @@ include "../includes/AdminSidebar.php";
             $('#view-subject-year_lvl').text(data.year_lvl);
             $('#view-subject-semester').text(data.semester);
             $('#view-subject-status').text(data.status);
+
             $('#course_id').val(data.course_id);
             $('#subject_code').val(data.subject_code);
             $('#subject_name').val(data.subject_name);
-            $('#pre_requisite').val(data.pre_requisite);
+            $('#pre_requisite').val(selectedSubject);
             $('#lab_units').val(Number(data.lab_units));
             $('#lec_units').val(Number(data.lec_units));
             $('#total_units').val(data.total_units);
@@ -221,26 +270,13 @@ include "../includes/AdminSidebar.php";
             $('#year_lvl').val(data.year_lvl);
             $('#semester').val(data.semester);
             $('#status').val(data.status);
+
             toggleUnits();
-        }
-
-        const setSelectedSubjectType = (type) => {
-            const selectedType = type.split(',');
-            return selectedType;
-        }
-
-        const toggleEditForm = () => {
-            $('#details-container').hide();
-            $('#edit-form-container').removeClass('d-none');
-        };
-
-        const toggleReadMode = () => {
-            $('#details-container').show();
-            $('#edit-form-container').addClass('d-none');
         };
 
         const toggleUnits = (labVal, lecVal) => {
             const selectedVal = $('#type').val();
+
             if (selectedVal && selectedVal.includes("Lab")) {
                 $('#lab_units').removeAttr('disabled');
             } else {
@@ -256,7 +292,21 @@ include "../includes/AdminSidebar.php";
                 $('#lec_units').prop('disabled', true);
                 $('#lec_units').prop('required', true);
             }
-        }
+        };
+
+        const toggleEditForm = () => {
+            $('#details-container').hide();
+            $('#edit-form-container').removeClass('d-none');
+        };
+
+        const toggleReadMode = () => {
+            $('#details-container').show();
+            $('#edit-form-container').addClass('d-none');
+        };
+
+        // ==============================
+        // EVENT LISTENERS
+        // ==============================
 
         $('#type').on('change', function() {
             toggleUnits();
@@ -270,29 +320,6 @@ include "../includes/AdminSidebar.php";
             toggleReadMode();
         });
 
-        const fetchSubject = async () => {
-            try {
-                const response = await $.ajax({
-                    method: "POST",
-                    url: "../Actions/Subject.php",
-                    data: {
-                        actionType: "GetSubjectById",
-                        subject_id: id
-                    },
-                    dataType: "json"
-                });
-                console.log(response);
-                if (response.status === "success") {
-                    fetchAllSubjectByCourse();
-                    setValue(response.data);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        fetchSubject();
-
         $('#edit-subject-form').on('submit', function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
@@ -304,9 +331,11 @@ include "../includes/AdminSidebar.php";
                 dataType: "json",
                 success: function(response) {
                     console.log(response);
+
                     if (response.status === "success") {
                         fetchSubject();
                         toggleReadMode();
+
                         Swal.fire({
                             icon: "success",
                             title: "Success",
@@ -324,6 +353,32 @@ include "../includes/AdminSidebar.php";
                     console.log(xhr.responseText);
                 }
             });
+        });
+
+        // ==============================
+        // INIT
+        // ==============================
+
+        fetchAllCourse();
+        fetchSubject();
+
+        // ==============================
+        // SELECT2
+        // ==============================
+        $('#pre_requisite').select2({
+            theme: "bootstrap-5",
+            containerCssClass: "select2--large",
+            selectionCssClass: "select2--large",
+            dropdownCssClass: "select2--large",
+            width: "resolve"
+        });
+
+        $('#type').select2({
+            theme: "bootstrap-5",
+            containerCssClass: "select2--large",
+            selectionCssClass: "select2--large",
+            dropdownCssClass: "select2--large",
+            width: "resolve"
         });
     });
 </script>

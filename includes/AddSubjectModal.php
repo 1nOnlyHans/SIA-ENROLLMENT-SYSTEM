@@ -24,20 +24,20 @@
                     </div>
                     <div class="mb-3">
                         <label for="pre_requisite" class="form-label">Pre Requisite</label>
-                        <select name="pre_requisite" id="pre_requisite" class="form-select">
-                            <option value="" disabled selected> --Select Subject Pre-Requisite --</option>
+                        <select name="pre_requisite[]" id="pre_requisite" class="form-select" multiple>
+                            <option value=""> --Select Subject Pre-Requisite --</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="units" class="form-label">Type</label>
                         <select name="type[]" id="type" class="form-select" multiple required>
-                            <option value="" disabled selected> --Select Subject Course--</option>
+                            <option value=""> --Select Subject Course--</option>
                             <option value="Lab">Laboratory</option>
                             <option value="Lec">Lecture</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="lab_units" class="form-label">Number of Laboratory Units</label>
+                        <label for="lab_units" class="form-label units">Number of Laboratory Units</label>
                         <input type="number" name="lab_units" id="lab_units" class="form-control units" placeholder="ex. 3" disabled>
                     </div>
                     <div class="mb-3">
@@ -116,7 +116,6 @@
                     });
                     const select = $('#pre_requisite');
                     select.empty();
-                    select.append('<option value="" disabled selected> -- Select Subject Pre-Requisite --</option>');
                     select.append(options);
                 }
             } catch (error) {
@@ -145,6 +144,18 @@
                 $('#lec_units').prop('disabled', true);
                 $('#lec_units').prop('required', true);
             }
+        });
+
+        $('#pre_requisite').select2({
+            theme: "bootstrap-5",
+            containerCssClass: "select2--large",
+            selectionCssClass: "select2--large",
+            dropdownCssClass: "select2--large",
+            width: "resolve"
+        });
+
+        $('.units').on('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 3);
         });
     });
 </script>

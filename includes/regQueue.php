@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     $(document).ready(function() {
         // REFACTOR
         var dataArray = [];
@@ -40,4 +40,4 @@
         Queue();
 
     });
-</script>
+</script> -->

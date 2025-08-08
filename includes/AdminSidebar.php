@@ -7,17 +7,17 @@ include "../includes/sessionchecker.php";
 
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title><?php echo $_GET["page"];?></title>
+  <title><?php echo $_GET["page"]; ?></title>
   <meta
     content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     name="viewport" />
   <?php
-    require_once "lib.php";
-    require_once "regQueue.php";
+  require_once "lib.php";
+  require_once "regQueue.php";
   ?>
 </head>
 
-<body >
+<body>
   <div class="wrapper">
     <!-- Sidebar -->
     <div class="sidebar sidebar-style-2">
@@ -52,6 +52,12 @@ include "../includes/sessionchecker.php";
               <a href="AdminUserManagement.php?page=UserManagement">
                 <i class="fa-solid fa-user"></i>
                 <p>User Management</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="AdminCurriculumManagement.php?page=Curriculum Management">
+                <i class="fa-solid fa-building"></i>
+                <p>Curriculum Management</p>
               </a>
             </li>
             <li class="nav-item">
@@ -168,8 +174,8 @@ include "../includes/sessionchecker.php";
       </div>
 
       <script>
-        $(document).ready(function(){
-          $('#logoutBtn').on('click',function(){
+        $(document).ready(function() {
+          $('#logoutBtn').on('click', function() {
             $.ajax({
               method: "POST",
               url: "../Actions/UserController.php",
@@ -177,12 +183,13 @@ include "../includes/sessionchecker.php";
                 actionType: "Logout"
               },
               dataType: "json",
-              success: function(response){
+              success: function(response) {
                 console.log(response);
-                if(response.status === "success"){
+                if (response.status === "success") {
                   window.location.href = `Login.php`;
                 }
-              },error: function(xhr){
+              },
+              error: function(xhr) {
                 console.log(xhr.responseText);
               }
             });

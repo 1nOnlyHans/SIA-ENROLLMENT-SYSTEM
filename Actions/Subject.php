@@ -19,7 +19,8 @@ switch ($actionType) {
             $course_id = InputHandler::sanitize_int($_POST['course_id'] ?? '');
             $subject_code = InputHandler::sanitize_string(strtoupper($_POST['subject_code'] ?? ''));
             $subject_name = InputHandler::sanitize_name($_POST['subject_name'] ?? '', true);
-            $pre_requisite = InputHandler::sanitize_string($_POST['pre_requisite'] ?? '');
+            $preqArray = InputHandler::sanitize_stringArr($_POST['pre_requisite'] ?? []);
+            $pre_requisites = implode(',', $preqArray);
             $lab_units = InputHandler::sanitize_int($_POST['lab_units'] ?? '');
             $lec_units = InputHandler::sanitize_int($_POST['lec_units'] ?? '');
             $units = $action->calculateTotalUnits($lab_units, $lec_units);
@@ -28,7 +29,7 @@ switch ($actionType) {
             $year_lvl = InputHandler::sanitize_string($_POST['year_lvl'] ?? '');;
             $semester = InputHandler::sanitize_int($_POST['semester'] ?? '');;
 
-            $response = $action->createSubject($course_id, $subject_code, $subject_name, $pre_requisite, $lab_units, $lec_units, $units, $subject_types, $year_lvl, $semester);
+            $response = $action->createSubject($course_id, $subject_code, $subject_name, $pre_requisites, $lab_units, $lec_units, $units, $subject_types, $year_lvl, $semester);
         }
 
         break;
@@ -62,7 +63,8 @@ switch ($actionType) {
             $course_id = InputHandler::sanitize_int($_POST['course_id'] ?? '');
             $subject_code = InputHandler::sanitize_string(strtoupper($_POST['subject_code'] ?? ''));
             $subject_name = InputHandler::sanitize_name($_POST['subject_name'] ?? '', true);
-            $pre_requisite = InputHandler::sanitize_string($_POST['pre_requisite'] ?? '');
+            $preqArray = InputHandler::sanitize_stringArr($_POST['pre_requisite'] ?? []);
+            $pre_requisites = implode(',', $preqArray);
             $lab_units = InputHandler::sanitize_int($_POST['lab_units'] ?? '');
             $lec_units = InputHandler::sanitize_int($_POST['lec_units'] ?? '');
             $units = $action->calculateTotalUnits($lab_units, $lec_units);
@@ -71,7 +73,7 @@ switch ($actionType) {
             $year_lvl = InputHandler::sanitize_string($_POST['year_lvl'] ?? '');;
             $semester = InputHandler::sanitize_int($_POST['semester'] ?? '');;
 
-            $response = $action->updateSubject($subject_id, $course_id, $subject_code, $subject_name, $pre_requisite, $lab_units, $lec_units, $units, $subject_types, $year_lvl, $semester);
+            $response = $action->updateSubject($subject_id, $course_id, $subject_code, $subject_name, $pre_requisites, $lab_units, $lec_units, $units, $subject_types, $year_lvl, $semester);
         }
         break;
     default:

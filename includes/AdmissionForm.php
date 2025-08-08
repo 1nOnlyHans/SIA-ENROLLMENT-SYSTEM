@@ -384,8 +384,8 @@
 
         $('#shs_school').select2({
             theme: "bootstrap-5",
-            containerCssClass: "select2--large", // For Select2 v4.0
-            selectionCssClass: "select2--large", // For Select2 v4.1
+            containerCssClass: "select2--large", 
+            selectionCssClass: "select2--large", 
             dropdownCssClass: "select2--large",
             width: "resolve"
         });

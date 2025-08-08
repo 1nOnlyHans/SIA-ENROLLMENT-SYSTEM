@@ -1,0 +1,493 @@
+<?php
+include "../includes/StudentNavbar.php";
+?>
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="text-center fw-bold">List of Sections</h1>
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>BSIT 11M1</h1>
+                            <table class="table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Title</th>
+                                        <th>Start</th>
+                                        <th>Time</th>
+                                        <th>Instructor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center py-5">
+                                <button type="button" class="btn btn-primary">Enroll this section</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>BSIT 11M1</h1>
+                            <table class="table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Title</th>
+                                        <th>Start</th>
+                                        <th>Time</th>
+                                        <th>Instructor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center py-5">
+                                <button type="button" class="btn btn-primary">Enroll this section</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>BSIT 11M1</h1>
+                            <table class="table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Title</th>
+                                        <th>Start</th>
+                                        <th>Time</th>
+                                        <th>Instructor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center py-5">
+                                <button type="button" class="btn btn-primary">Enroll this section</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>BSIT 11M1</h1>
+                            <table class="table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Title</th>
+                                        <th>Start</th>
+                                        <th>Time</th>
+                                        <th>Instructor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center py-5">
+                                <button type="button" class="btn btn-primary">Enroll this section</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>BSIT 11M1</h1>
+                            <table class="table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Title</th>
+                                        <th>Start</th>
+                                        <th>Time</th>
+                                        <th>Instructor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center py-5">
+                                <button type="button" class="btn btn-primary">Enroll this section</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1>BSIT 11M1</h1>
+                            <table class="table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Title</th>
+                                        <th>Start</th>
+                                        <th>Time</th>
+                                        <th>Instructor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IT 101</td>
+                                        <td>Computer Programming 1</td>
+                                        <td>8:00AM</td>
+                                        <td>12:00PM</td>
+                                        <td>Prof. IT Instructor</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center py-5">
+                                <button type="button" class="btn btn-primary">Enroll this section</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+include "../includes/footer.php";
+?>
+
+// Cashier
+<?php
+include "../includes/CashierNavbar.php";
+?>
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex flex-row gap-3 w-50">
+                    <label for="student_id" class="form-label fw-bold">STUDENT ID</label>
+                    <input type="text" name="student_id" id="student_id" class="form-control" placeholder="Enter Student ID">
+                    <button type="button" class="btn btn-dark">Search</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container">
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr>
+                                <td>2021-00001</td>
+                                <td>Juan Dela Cruz</td>
+                                <td>
+                                    <div class="d-flex justify-content-center align-content-center gap-3">
+                                        <button class="btn btn-primary btn-sm">View</button>
+                                        <button class="btn btn-success btn-sm">Pay</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2021-00002</td>
+                                <td>Maria Santos</td>
+                                <td>
+                                    <div class="d-flex justify-content-center align-content-center gap-3">
+                                        <button class="btn btn-primary btn-sm">View</button>
+                                        <button class="btn btn-success btn-sm">Pay</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2021-00003</td>
+                                <td>Carlos Reyes</td>
+                                <td>
+                                    <div class="d-flex justify-content-center align-content-center gap-3">
+                                        <button class="btn btn-primary btn-sm">View</button>
+                                        <button class="btn btn-success btn-sm">Pay</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2021-00004</td>
+                                <td>Ana Rodriguez</td>
+                                <td>
+                                    <div class="d-flex justify-content-center align-content-center gap-3">
+                                        <button class="btn btn-primary btn-sm">View</button>
+                                        <button class="btn btn-success btn-sm">Pay</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2021-00005</td>
+                                <td>Mark Lopez</td>
+                                <td>
+                                    <div class="d-flex justify-content-center align-content-center gap-3">
+                                        <button class="btn btn-primary btn-sm">View</button>
+                                        <button class="btn btn-success btn-sm">Pay</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
