@@ -33,6 +33,15 @@ switch ($actionType) {
             $response = $action->getCurriculum($curriculum_id);
         }
         break;
+    case 'GetSubjectsByCourseAndLevel':
+        if ($requestMethod === "POST") {
+            $course_id = InputHandler::sanitize_int($_POST['course_id']);
+            $sy = InputHandler::sanitize_string($_POST['school_year']);
+            $year_lvl = InputHandler::sanitize_int($_POST['year_lvl']);
+            $semester = InputHandler::sanitize_int($_POST['semester']);
+            $response = $action->getSubjectByCourseAndYear($course_id, $sy, $year_lvl, $semester);
+        }
+        break;
     default:
         $response = [
             "status" => "error",

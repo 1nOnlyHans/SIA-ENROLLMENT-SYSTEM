@@ -1,0 +1,448 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-weight: 200;
+    scroll-behavior: smooth;
+}
+body{
+    display: flex;
+    font-family: sans-serif;
+    background-color: hsl(0, 0%, 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    background: transparent;
+    background-color: rgba(0, 0, 0, 0.7);
+    height:100vh;
+    width:240px;
+    color:white;
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.logo{
+    position: absolute;
+    top:0;
+    background-color: #222222;
+    min-height: 60px;
+    width:100%;
+    padding:0;
+    left:0;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo h3{
+    font-weight: 500;
+}
+
+.sidebar ul{
+    list-style: none;
+    margin-top: 20px;
+}
+.sidebar li{
+    margin-bottom: 40px;
+    margin-top: 30px;
+    padding:10px;
+    font-weight: 200;
+    transition: 0.1s ease;
+    border-radius: 5px;
+}
+.sidebar li:hover{
+    background-color: rgb(230, 175, 11, 0.7);
+}
+.sidebar a{
+    color:white;
+    text-decoration: none;
+}
+i{
+    margin-right: 5px;
+}
+.main-content{
+    margin-left: 240px;
+    width: calc(100% - 240px);
+}
+.navbar{
+    background: transparent;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding:15px 20px;
+    top:0;
+    position:sticky;
+    z-index: 1000;
+    box-sizing: border-box;
+    min-height: 60px;
+}
+.navbar h4{
+    position: absolute;
+    right:5%;
+    font-weight: 300;
+    color:white;
+}
+.content{
+    padding:20px;
+}
+.toggle-btn{
+    position:fixed;
+    top: 10px;
+    left: 10px;
+    color:black;
+    border:none;
+    font-size: 20px;
+    padding:10px 12px;
+    border-radius: 5px;
+    cursor:pointer;
+    z-index:2000;
+    display:none;
+}
+.sidebar.sidebar-collapsed{
+    transform:translateX(-100%);
+    transition:transform 0.3s ease;
+}
+.sidebar{
+    transition:transform 0.3s ease;
+}
+@media (max-width: 500px){
+    .sidebar{
+        transform: translateX(-100%);
+    }
+    .sidebar.sidebar-collapsed{
+        transform: translateX(0);
+    }
+    .toggle-btn{
+        display: block;
+    }
+    .main-content{
+        margin-left: 0;
+        width:100%;
+    }
+    input{
+        width:100%;
+    }
+    .input-container{
+        flex-direction: column;
+    }
+    .address-container{
+        flex-direction: column;
+    }
+    #address{
+        max-width: 350px;
+    }
+    .status-container{
+        flex-direction: column;
+    }
+    .mail-religion-container{
+        flex-direction: column;
+    }
+    .primary-container{
+        flex-direction: column;
+    }
+    #primary, #secondary, #tertiary{
+        max-width: 350px;
+    }
+    .secondary-container{
+        flex-direction: column;
+    }
+    .tertiary-container{
+         flex-direction: column;
+    }
+    .achieve-container{
+        flex-direction: column;
+    }
+    #ePlan, #achievement{
+        max-width: 350px;
+    }
+}
+.card{
+    background: transparent;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.card-content{
+    padding:20px;
+}
+.card-title{
+    background-color: hsl(0, 0%, 96%);
+    border-bottom: 1px solid hsl(0, 3%, 85%);
+}
+.card-title h3{
+    font-weight: 300;
+}
+.card-title h4{
+    padding-bottom: 20px;
+}
+.title-content{
+    padding-bottom: 5px;
+    padding:10px;
+    color:hsl(0, 0%, 18%)
+}
+.card-desc{
+    border-bottom: 1px solid hsl(0, 3%, 85%);
+}
+.card-desc p{
+    padding:20px;
+    color:hsl(0, 0%, 25%);
+    font-weight: 300;
+}
+.card-desc ul{
+    padding-left: 50px;
+    color:hsl(0, 0%, 25%);
+    font-weight: 300;
+}
+.card-button{
+    padding-top: 10px;
+    text-align: right;
+}
+.rturn-btn{
+    padding:10px;
+    color:white;
+    background-color: #4175e6;
+    border:none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+.rturn-btn:hover{
+    background-color: #274585;
+}
+.form-container{
+    margin:20px;
+    padding:10px;
+    background: transparent;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.form-title{
+    background-color: hsl(0, 0%, 90%);
+    padding:20px;
+    border-bottom: 1px solid hsl(0, 3%, 85%);
+}
+input:focus{
+    box-shadow: 0 0 5px #0e83c7;
+}
+input{
+    background-color: hsl(0, 0%, 97%);
+    outline:none;
+    border:1px solid  hsl(0, 3%, 85%);
+    border-radius: 5px;
+    padding:5px;
+}
+select{
+    background-color: hsl(0, 0%, 97%);
+    outline:none;
+    border:1px solid  hsl(0, 3%, 85%);
+    border-radius: 5px;
+    padding:5px;
+}
+select:focus{
+    box-shadow: 0 0 5px #0e83c7;
+}
+.title{
+     padding:20px;
+}
+.title span{
+    background-color: #0e83c7;
+    color:white;
+    padding:5px;
+    border-radius: 5px;
+}
+.desired-course-box{
+    padding:20px;
+    border-bottom: 1px solid hsl(0, 3%, 85%);
+}
+#course{
+    width:70%;
+    padding:5px;
+    margin-top:5px;
+}
+.personal-infos-box{
+    padding:20px;
+    display:flex;
+    flex-direction: column;
+    border-bottom: 1px solid hsl(0, 3%, 85%);
+}
+.input-container{
+    display: flex;
+    justify-content: space-between;
+}
+.address-container{
+    display:flex;
+    margin-top: 10px;
+    align-items: center;
+}
+#address{
+    width: 500px;
+    margin-right: 10px;
+}
+.status-container{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+#nationality{
+    width: 150px;
+}
+.mail-religion-container{
+    display:flex;
+    align-items: center;
+    margin-top: 10px;
+}
+#email{
+    width:350px;
+    margin-right: 10px;
+}
+.education-infos-box{
+    padding:20px;
+    display:flex;
+    flex-direction: column;
+    border-bottom: 1px solid hsl(0, 3%, 85%);
+}
+.primary-container{
+    display:flex;
+    align-items: center;
+    margin-top: 10px;
+}
+#primary{
+    width:500px;
+    margin-right: 10px;
+}
+.secondary-container{
+    display:flex;
+    align-items: center;
+    margin-top: 10px;
+}
+#secondary{
+    width:500px;
+    margin-right: 10px;
+}
+.tertiary-container{
+    display:flex;
+    align-items: center;
+    margin-top: 10px;
+}
+#tertiary{
+    width:500px;
+    margin-right: 10px;
+}
+#yearGradTertiary{
+     margin-right: 10px;
+}
+.achieve-container{
+    display:flex;
+    align-items: center;
+    margin-top: 10px;
+}
+#achievement{
+    width:500px;
+}
+.work-info-box{
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: 1px solid hsl(0, 3%, 85%);
+    padding-bottom: 5px;
+}
+.qstion-box{
+    border-bottom: 1px solid hsl(0, 3%, 85%);
+    padding:20px;
+}
+#referal{
+    width:70%;
+    padding:5px;
+    margin-top:5px;
+}
+.other-info-box{
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: 1px solid hsl(0, 3%, 85%);
+    padding-bottom: 5px;
+}
+.parent-guardian-box{
+    display:flex;
+    flex-direction: column;
+    border-bottom: 1px solid hsl(0, 3%, 85%);
+    padding-bottom: 5px;
+}
+.parent-title{
+    padding:20px;
+}
+.father-name-container{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.father-address-container{
+    margin-top: 10px;
+}
+#fatherAddress{
+    width:70%;
+}
+.father-info-container{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.mother-name-container{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.mother-maiden-container{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.mother-address-container{
+    margin-top: 10px;
+}
+#motherAddress{
+    width:70%;
+}
+.mother-info-container{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.guardian-name-container{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.guardian-address-container{
+    margin-top: 10px;
+}
+#guardianAddress{
+     width:70%;
+}
+.guardian-info-container{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.form-btns{
+    padding:20px;
+    background-color: hsl(0, 0%, 97%);
+}
+.btn{
+    padding:10px;
+    color:white;
+    border:none;
+    border-radius: 5px;
+}
+#submit{
+    background-color: hsl(145, 71%, 40%);
+}
+#cancel{
+    background-color: hsl(204, 81%, 40%);
+}

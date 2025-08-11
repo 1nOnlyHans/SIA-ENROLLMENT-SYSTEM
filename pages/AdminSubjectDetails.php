@@ -15,10 +15,6 @@ include "../includes/AdminSidebar.php";
                     <div id="details-container">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label fw-bold">Course:</label>
-                                <p class="form-control-plaintext" id="view-course-name"></p>
-                            </div>
-                            <div class="col-md-6">
                                 <label class="form-label fw-bold">Subject Code:</label>
                                 <p class="form-control-plaintext" id="view-subject-code"></p>
                             </div>
@@ -66,11 +62,6 @@ include "../includes/AdminSidebar.php";
                             <input type="hidden" name="actionType" value="UpdateSubject">
                             <input type="hidden" name="subject_id" id="subject_id">
                             <div class="row g-3">
-                                <div class="col-md-12">
-                                    <label for="course_id" class="form-label fw-bold">Course:</label>
-                                    <select name="course_id" id="course_id" class="form-select" required></select>
-                                </div>
-
                                 <div class="col-md-6">
                                     <label for="subject_code" class="form-label fw-bold">Subject Code:</label>
                                     <input type="text" name="subject_code" id="subject_code" class="form-control" placeholder="Enter Subject Code" required>
@@ -149,31 +140,8 @@ include "../includes/AdminSidebar.php";
         // FETCH FUNCTIONS
         // ==============================
 
-        const fetchAllCourse = async () => {
-            try {
-                const response = await $.ajax({
-                    method: "GET",
-                    url: "../Actions/CourseController.php?actionType=GetAllCourse",
-                    dataType: "json"
-                });
 
-                if (response.status === "success") {
-                    const select = $('#course_id');
-                    select.empty();
-
-                    let options = response.data.map((data) => {
-                        let option = $('<option></option>').val(data.id).text(data.course_name);
-                        return option;
-                    });
-
-                    select.append(options);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        const fetchAllSubjectByCourse = async () => {
+        const fetchSubjectPreQ = async () => {
             var course_id = $('#course_id').val();
 
             try {
@@ -219,7 +187,7 @@ include "../includes/AdminSidebar.php";
                 console.log(response);
 
                 if (response.status === "success") {
-                    await fetchAllSubjectByCourse();
+                    await fetchSubjectPreQ();
                     setValue(response.data);
                 }
             } catch (error) {
@@ -247,7 +215,6 @@ include "../includes/AdminSidebar.php";
 
             $('#title').text(data.subject_name + " " + "(" + data.subject_code + ")");
             $('#subject_id').val(data.id);
-            $('#view-course-name').text(data.course_name);
             $('#view-subject-code').text(data.subject_code);
             $('#view-subject-name').text(data.subject_name);
             $('#view-subject-pre_requisite').text(data.pre_requisite);
@@ -259,7 +226,6 @@ include "../includes/AdminSidebar.php";
             $('#view-subject-semester').text(data.semester);
             $('#view-subject-status').text(data.status);
 
-            $('#course_id').val(data.course_id);
             $('#subject_code').val(data.subject_code);
             $('#subject_name').val(data.subject_name);
             $('#pre_requisite').val(selectedSubject);
@@ -359,7 +325,6 @@ include "../includes/AdminSidebar.php";
         // INIT
         // ==============================
 
-        fetchAllCourse();
         fetchSubject();
 
         // ==============================

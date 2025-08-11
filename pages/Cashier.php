@@ -1,10 +1,10 @@
 <?php
-include "../includes/CashierNavbar.php";
-include "../includes/sidebar.php";
+include "../includes/header.php";
+
 ?>
 
 
-<!-- <div class="container mt-5">
+<div class="container mt-5">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Student ID</h5>
@@ -18,7 +18,7 @@ include "../includes/sidebar.php";
             </div>
         </div>
 
-        
+
         <div class="card-body">
             <div class="card border-0 mb-4">
                 <div class="card-header bg-dark text-white">
@@ -45,7 +45,7 @@ include "../includes/sidebar.php";
                 </div>
             </div>
 
-            
+
             <div class="card border-0 mb-4">
                 <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
                     <h6 class="mb-0">Fees</h6>
@@ -59,7 +59,7 @@ include "../includes/sidebar.php";
                 </div>
             </div>
 
-            
+
             <div class="card border-0">
                 <div class="card-header bg-success text-white">
                     <h6 class="mb-0">Payment Details</h6>
@@ -94,4 +94,4 @@ include "../includes/sidebar.php";
 
         </div>
     </div>
-</div> -->
+</div>

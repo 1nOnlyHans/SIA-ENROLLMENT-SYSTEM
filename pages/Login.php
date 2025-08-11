@@ -50,9 +50,13 @@
             const redirect = (role) => {
                 let page = "";
                 if (role === "Admin") {
-                    page = "Admin"
+                    page = "Admin";
                 } else if (role === "Student") {
-                    page = "Student"
+                    page = "Student";
+                } else if (role === "Registrar") {
+                    page = "Registrar";
+                } else if (role === "Staff") {
+                    page = "Staff";
                 }
                 setTimeout(() => {
                     window.location.href = `${page}Dashboard.php?page=${page}Dashboard`;
@@ -102,7 +106,7 @@
             z-index: -1;
 
         }
-        
+
         .form-control {
             display: block;
             width: 100%;

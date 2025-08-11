@@ -152,10 +152,10 @@
                                 <label for="transferee_yr_level" class="form-label">Year Level (Transferee)</label>
                                 <select name="transferee_yr_level" id="transferee_yr_level" class="form-select transferee_input" required>
                                     <option value="" selected disabled> --Select Year Level-- </option>
-                                    <option value="First Year">First Year</option>
-                                    <option value="Second Year">Second Year</option>
-                                    <option value="Third Year">Third Year</option>
-                                    <option value="Fourth Year">Fourth Year</option>
+                                    <option value="1st">First Year</option>
+                                    <option value="2nd">Second Year</option>
+                                    <option value="3rd">Third Year</option>
+                                    <option value="4th">Fourth Year</option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -306,6 +306,7 @@
                     url: "../Actions/CourseController.php?actionType=GetAllCourse",
                     dataType: "json"
                 });
+
                 if (response.status === "success") {
 
                     let options = response.data.map((data) => {
@@ -332,9 +333,7 @@
                 console.log(response);
                 if (response.status === "success") {
                     const school_year_selection = $('#sy');
-
                     let school_year_options = $('<option></option>').val(response.data.id).text(response.data.SY);
-
                     school_year_selection.append(response.data !== false ? school_year_options : $('<option></option>').val("").text("No Active School Year"));
                 }
             } catch (error) {
@@ -352,6 +351,7 @@
                     dataType: "json"
                 });
 
+                console.log(response);
                 if (response.status === "success") {
                     const semester = $('#semester');
                     //Refactor
@@ -365,6 +365,10 @@
 
         $('#sy').on('change', function() {
             fetchActiveSemester();
+        });
+
+        $('#semester').on('change', function() {
+            console.log($(this).val());
         });
 
         $('#shs_school').on('change', function() {
@@ -384,8 +388,8 @@
 
         $('#shs_school').select2({
             theme: "bootstrap-5",
-            containerCssClass: "select2--large", 
-            selectionCssClass: "select2--large", 
+            containerCssClass: "select2--large",
+            selectionCssClass: "select2--large",
             dropdownCssClass: "select2--large",
             width: "resolve"
         });

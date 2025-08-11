@@ -65,6 +65,16 @@ class Curriculum extends Dbh
     {
         try {
             $this->db->beginTransaction();
+            $checkIfDuplicated = $this->db->prepare("SELECT 1 FROM curriculum WHERE course_id = :course_id AND curriculum_name = :curriculum_name AND sy = :sy");
+            $checkIfDuplicated->execute(['course_id' => $course_id, 'curriculum_name' => $curriculum_title, 'sy' => $sy]);
+            if ($checkIfDuplicated->rowCount() > 0) {
+                $this->db->rollBack();
+                return [
+                    "status" => "error",
+                    "message" => "Curriculum duplicated"
+                ];
+            }
+
             $insertCurriculum = $this->createNewCurriculum($course_id, $curriculum_title, $sy);
             if ($insertCurriculum['status'] === "error") {
                 $this->db->rollBack();
@@ -150,6 +160,59 @@ class Curriculum extends Dbh
         } catch (PDOException $e) {
             return [
                 "status" => "404",
+                "message" => "Database Error: " . $e->getMessage()
+            ];
+        }
+    }
+
+    public function getSubjectByCourseAndYear($course_id, $sy, $year_lvl, $semester)
+    {
+        try {
+            $stmt = $this->db->prepare("
+            SELECT 
+            c.id AS course_id,
+            c.course_code,
+            c.course_name,
+            cur.id AS curriculum_id,
+            cur.curriculum_name,
+            s.id AS subject_id,
+            s.subject_code,
+            s.subject_name,
+            s.type,
+            s.year_lvl,
+            s.semester,
+            s.lec_units,
+            s.lab_units,
+            s.total_units
+        FROM courses AS c
+        JOIN curriculum AS cur 
+            ON cur.course_id = c.id
+        JOIN curriculum_subjects AS cs 
+            ON cs.curriculum_id = cur.id
+        JOIN subjects AS s 
+            ON s.id = cs.subject_id
+        WHERE c.id = :course_id AND cur.sy = :sy
+        AND s.year_lvl = :year_level AND s.semester = :semester
+        GROUP BY s.id, c.id-- group by unique identifiers
+        ORDER BY s.year_lvl, s.semester, s.subject_code
+            ");
+            $stmt->execute(['course_id' => $course_id, 'sy' => $sy, 'year_level' => $year_lvl, 'semester' => $semester]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($row) {
+                return [
+                    "status" => "success",
+                    "message" => "Subjects found.",
+                    "data" => $row
+                ];
+            } else {
+                return [
+                    "status" => "error",
+                    "message" => "Subjects not found."
+                ];
+            }
+        } catch (PDOException $e) {
+            return [
+                "status" => "error",
                 "message" => "Database Error: " . $e->getMessage()
             ];
         }

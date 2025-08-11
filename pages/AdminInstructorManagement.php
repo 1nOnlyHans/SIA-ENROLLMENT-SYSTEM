@@ -6,8 +6,10 @@ include "../includes/AdminSidebar.php";
     <div class="page-inner">
         <div class="card">
             <div class="card-body">
-                <h2>List of Instructors</h2>
-                <button type="button" class="btn btn-primary mb-3">+ New Instructor</button>
+                <div class="d-flex justify-content-center align-content-center">
+                    <h2>List of Instructors</h2>
+                    <button type="button" class="btn btn-primary mb-3">+ New Instructor</button>
+                </div>
                 <table class="table table-responsive table-bordered">
                     <thead>
                         <tr>

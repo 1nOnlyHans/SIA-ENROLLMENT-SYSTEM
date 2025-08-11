@@ -9,12 +9,6 @@
                 <form method="post" id="create-subject-form">
                     <!-- <input type="hidden" name="actionType" id="actionType" class="form-control" value="CreateSubject"> -->
                     <div class="mb-3">
-                        <label for="course_id" class="form-label">Course</label>
-                        <select name="course_id" id="course_id" class="form-select" required>
-                            <option value="" disabled selected> --Select Subject Course--</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
                         <label for="subject_code" class="form-label">Subject Code</label>
                         <input type="text" name="subject_code" id="subject_code" class="form-control" placeholder="Enter Subject Code" required>
                     </div>
@@ -74,88 +68,59 @@
 
 <script>
     $(document).ready(function() {
-        const fetchAllCourse = async () => {
-            try {
-                const response = await $.ajax({
-                    method: "GET",
-                    url: "../Actions/CourseController.php?actionType=GetAllCourse",
-                    dataType: "json"
-                });
-                if (response.status === "success") {
+        // const fetchAllSubjects = async () => {
+        //     try {
+        //         const response = await $.ajax({
+        //             method: "GET",
+        //             url: "../Actions/Subject.php?actionType=GetAllSubjects",
+        //             dataType: "json"
+        //         });
+        //         console.log(response);
+        //         if (response.status === "success") {
+        //             const select = $('#pre_requisite');
+        //             select.empty();
+        //             let options = response.data.map((data) => {
+        //                 let option = $('<option></option>').val(data.subject_code).text(data.subject_name)
+        //                 return option;
+        //             });
+        //             select.append(options);
+        //         }
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // }
 
-                    let options = response.data.map((data) => {
-                        let option = $('<option></option>').val(data.id).text(data.course_name)
-                        return option;
-                    });
-                    const select = $('#course_id');
-                    select.append(options);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
+        // $('#type').on('change', function() {
+        //     const selectedVal = $(this).val();
+        //     if (selectedVal && selectedVal.includes("Lab")) {
+        //         $('#lab_units').removeAttr('disabled');
+        //     } else {
+        //         $('#lab_units').val('');
+        //         $('#lab_units').prop('disabled', true);
+        //         $('#lab_units').prop('required', true);
+        //     }
 
-        fetchAllCourse();
+        //     if (selectedVal && selectedVal.includes("Lec")) {
+        //         $('#lec_units').removeAttr('disabled');
+        //     } else {
+        //         $('#lec_units').val('');
+        //         $('#lec_units').prop('disabled', true);
+        //         $('#lec_units').prop('required', true);
+        //     }
+        // });
 
-        const fetchAllSubjectByCourse = async () => {
-            var course_id = $('#course_id').val();
-            try {
-                const response = await $.ajax({
-                    method: "POST",
-                    url: "../Actions/Subject.php?actionType=GetAllSubjectByCourse",
-                    data: {
-                        course_id: course_id
-                    },
-                    dataType: "json"
-                });
-                console.log(response);
-                if (response.status === "success") {
-                    let options = response.data.map((data) => {
-                        let option = $('<option></option>').val(data.subject_code).text(data.subject_name)
-                        return option;
-                    });
-                    const select = $('#pre_requisite');
-                    select.empty();
-                    select.append(options);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
+        // $('#pre_requisite').select2({
+        //     theme: "bootstrap-5",
+        //     containerCssClass: "select2--large",
+        //     selectionCssClass: "select2--large",
+        //     dropdownCssClass: "select2--large",
+        //     width: "resolve"
+        // });
 
-        $('#course_id').on('change', function() {
-            fetchAllSubjectByCourse();
-        });
+        // $('.units').on('input', function() {
+        //     this.value = this.value.replace(/\D/g, '').slice(0, 3);
+        // });
 
-        $('#type').on('change', function() {
-            const selectedVal = $(this).val();
-            if (selectedVal && selectedVal.includes("Lab")) {
-                $('#lab_units').removeAttr('disabled');
-            } else {
-                $('#lab_units').val('');
-                $('#lab_units').prop('disabled', true);
-                $('#lab_units').prop('required', true);
-            }
-
-            if (selectedVal && selectedVal.includes("Lec")) {
-                $('#lec_units').removeAttr('disabled');
-            } else {
-                $('#lec_units').val('');
-                $('#lec_units').prop('disabled', true);
-                $('#lec_units').prop('required', true);
-            }
-        });
-
-        $('#pre_requisite').select2({
-            theme: "bootstrap-5",
-            containerCssClass: "select2--large",
-            selectionCssClass: "select2--large",
-            dropdownCssClass: "select2--large",
-            width: "resolve"
-        });
-
-        $('.units').on('input', function() {
-            this.value = this.value.replace(/\D/g, '').slice(0, 3);
-        });
+        // fetchAllSubjects();
     });
 </script>

@@ -6,8 +6,10 @@ include "../includes/AdminSidebar.php";
     <div class="page-inner">
         <div class="card">
             <div class="card-body">
-                <h2>List of Departments</h2>
-                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#AddDepartment">+ New Department</button>
+                <div class="d-flex justify-content-between align-content-center">
+                    <h2>List of Departments</h2>
+                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#AddDepartment">+ New Department</button>
+                </div>
                 <table class="table table-responsive table-bordered table-striped" id="department-tbl">
                     <thead class="thead-dark">
                         <tr>
@@ -28,6 +30,7 @@ include "../includes/AdminSidebar.php";
 <?php
 include "../includes/AddDepartmentModal.php";
 ?>
+
 <script>
     $(document).ready(function() {
 
@@ -96,33 +99,14 @@ include "../includes/AddDepartmentModal.php";
                         paging: true,
                         dom: "Blfrtip",
                         buttons: [{
-                                extend: "print",
-                                title: "List of Departments",
-                                text: "Print",
-                                className: "btn btn-dark me-3 mb-3",
-                                exportOptions: {
-                                    columns: [0, 1, 2, 3]
-                                }
-                            },
-                            {
-                                extend: "csv",
-                                title: "List of Departments",
-                                text: "CSV",
-                                className: "btn btn-dark me-3 mb-3",
-                                exportOptions: {
-                                    columns: [0, 1, 2, 3]
-                                }
-                            },
-                            {
-                                extend: "pdf",
-                                title: "List of Departments",
-                                text: "PDF",
-                                className: "btn btn-dark me-3 mb-3",
-                                exportOptions: {
-                                    columns: [0, 1, 2, 3]
-                                }
+                            extend: "print",
+                            title: "",
+                            text: "<i class='fa-solid fa-print'></i> Print",
+                            className: "btn btn-danger me-3 mb-3 fw-bold",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3]
                             }
-                        ]
+                        }, ]
                     });
                 }
             } catch (error) {

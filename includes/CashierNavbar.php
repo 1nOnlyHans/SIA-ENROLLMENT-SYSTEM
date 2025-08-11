@@ -1,6 +1,3 @@
-<?php
-include "header.php";
-?>
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand text-warning fw-bold" href="#"><img src="../assets/ncst-logo.png" width="50" height="50">Cashier</a>

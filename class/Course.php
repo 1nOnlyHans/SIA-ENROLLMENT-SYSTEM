@@ -240,7 +240,6 @@ class Course extends Dbh
                     "message" => "Course not found or already deleted."
                 ];
             }
-            
         } catch (PDOException $e) {
             return [
                 "status" => "error",
@@ -248,4 +247,17 @@ class Course extends Dbh
             ];
         }
     }
+
+    public function archiveAllDepartmentCourse($department_id)
+    {
+        $status = "Archived";
+        try {
+            $stmt = $this->db->prepare("UPDATE courses SET status = :status WHERE department_id = :department_id");
+            $stmt->execute(['status' => $status, 'department_id' => $department_id]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    
 }

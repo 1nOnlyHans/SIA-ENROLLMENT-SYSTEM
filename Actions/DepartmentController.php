@@ -1,11 +1,16 @@
 <?php
 
-require "../class/Department.php";
-require "../Helpers/InputHandler.php";
+require_once "../class/Department.php";
+require_once "../Helpers/InputHandler.php";
+require_once "../class/Course.php";
 
 $actionType = InputHandler::sanitize_string($_REQUEST['actionType']);
 
 $action = new Department();
+$course = new Course();
+$db = new Dbh();
+$conn = $db->Connect();
+
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 $response = [
@@ -46,7 +51,30 @@ switch ($actionType) {
     case 'ArchiveDepartment':
         if ($requestMethod === "POST") {
             $id = InputHandler::sanitize_int($_POST['department_id'] ?? '');
-            $response = $action->archiveDepartment($id);
+            $conn->beginTransaction();
+            $archiveDepartment = $action->archiveDepartment($id);
+            if ($archiveDepartment['status'] === "success") {
+                $archiveCourse = $course->archiveAllDepartmentCourse($id);
+                if ($archiveCourse) {
+                    $conn->commit();
+                    $response = [
+                        "status" => "success",
+                        "message" => "Department and Course Archived"
+                    ];
+                } else {
+                    $conn->rollBack();
+                    $response = [
+                        "status" => "error",
+                        "message" => "Failed to archive all department courses"
+                    ];
+                }
+            } else {
+                $conn->rollBack();
+                $response = [
+                    "status" => "error",
+                    "message" => "Failed to archive department"
+                ];
+            }
         }
         break;
     default:

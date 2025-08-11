@@ -1,7 +1,10 @@
 <?php
 include "../includes/AdminSidebar.php";
 ?>
-
+<!-- 
+    NAKAKAPAG ADD NG SAME CURRICULUM NAGIGING DOBLE
+    WALA PANG UPDATE AND REMOVE
+-->
 <div class="container">
     <div class="page-inner">
         <div class="card">
@@ -85,8 +88,7 @@ include "../includes/AddCurriculumModal.php";
                         pageLength: 5,
                         paging: true,
                         dom: "Blfrtip",
-                        buttons: [
-                            {
+                        buttons: [{
                             extend: "print",
                             title: "",
                             text: "<i class='fa-solid fa-print'></i> Print",
@@ -115,7 +117,21 @@ include "../includes/AddCurriculumModal.php";
                 success: function(response) {
                     if (response.status === "success") {
                         $('#create-curriculum-form')[0].reset();
+                        $('#subject_id').val('').trigger('change');
                         fetchAllCurriculums();
+                        let Modal = bootstrap.Modal.getInstance(document.getElementById('AddCurriculum'));
+                        Modal.hide();
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                            text: response.message
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Failed",
+                            text: response.message
+                        });
                     }
                 },
                 error: function(xhr) {

@@ -9,18 +9,18 @@ class Subject extends Dbh
         $this->db = $this->Connect();
     }
 
-    public function createSubject($course_id, $subject_code, $subject_name, $pre_requisite, $lab_units, $lec_units, $units, $type, $year_lvl, $semester)
+    public function createSubject($subject_code, $subject_name, $pre_requisite, $lab_units, $lec_units, $units, $type, $year_lvl, $semester)
     {
         try {
-            $checkIfAlreadyExists = $this->checkIfSubjectAlreadyExists($course_id, $subject_code, $type, $year_lvl, $semester);
+            $checkIfAlreadyExists = $this->checkIfSubjectAlreadyExists($subject_code, $type, $year_lvl, $semester);
 
             if ($checkIfAlreadyExists['status'] === "duplicate") {
                 return $checkIfAlreadyExists;
             }
 
             $this->db->beginTransaction();
-            $stmt = $this->db->prepare("INSERT INTO subjects (course_id,subject_code,subject_name,pre_requisite,lab_units,lec_units,total_units,type,year_lvl,semester) VALUES (:course_id,:subject_code,:subject_name,:pre_requisite,:lab_units,:lec_units,:total_units,:type,:year_lvl,:semester)");
-            $isAdded = $stmt->execute(['course_id' => $course_id, 'subject_code' => $subject_code, 'subject_name' => $subject_name, 'pre_requisite' => $pre_requisite, 'lab_units' => $lab_units, 'lec_units' => $lec_units, 'total_units' => $units, 'type' => $type, 'year_lvl' => $year_lvl, 'semester' => $semester]);
+            $stmt = $this->db->prepare("INSERT INTO subjects (subject_code,subject_name,pre_requisite,lab_units,lec_units,total_units,type,year_lvl,semester) VALUES (:subject_code,:subject_name,:pre_requisite,:lab_units,:lec_units,:total_units,:type,:year_lvl,:semester)");
+            $isAdded = $stmt->execute(['subject_code' => $subject_code, 'subject_name' => $subject_name, 'pre_requisite' => $pre_requisite, 'lab_units' => $lab_units, 'lec_units' => $lec_units, 'total_units' => $units, 'type' => $type, 'year_lvl' => $year_lvl, 'semester' => $semester]);
 
             if (!$isAdded) {
                 $this->db->rollBack();
@@ -48,7 +48,7 @@ class Subject extends Dbh
     public function getAllSubjectById($subject_id)
     {
         try {
-            $stmt = $this->db->prepare("SELECT c.id as course_id,c.course_code,c.course_name,s.* FROM subjects s INNER JOIN courses c ON c.id = s.course_id WHERE s.id = :id");
+            $stmt = $this->db->prepare("SELECT s.* FROM subjects s WHERE s.id = :id");
             $stmt->execute(['id' => $subject_id]);
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($row) {
@@ -75,7 +75,7 @@ class Subject extends Dbh
     public function getAllSubjects()
     {
         try {
-            $stmt = $this->db->prepare("SELECT c.course_code,s.* FROM subjects s INNER JOIN courses c ON c.id = s.course_id GROUP by s.course_id, s.subject_code
+            $stmt = $this->db->prepare("SELECT s.* FROM subjects s
             ");
             $stmt->execute();
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -128,8 +128,8 @@ class Subject extends Dbh
     public function getSubjectPreRequisite($course_id, $subject_id)
     {
         try {
-            $stmt = $this->db->prepare("SELECT c.course_code,s.* FROM subjects s INNER JOIN courses c ON c.id = s.course_id WHERE (s.course_id = :course_id) AND (s.id != :subject_id)");
-            $stmt->execute(['course_id' => $course_id, 'subject_id' => $subject_id]);
+            $stmt = $this->db->prepare("SELECT s.* FROM subjects s WHERE s.id != :subject_id");
+            $stmt->execute(['subject_id' => $subject_id]);
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if ($row) {
                 return [
@@ -151,13 +151,12 @@ class Subject extends Dbh
         }
     }
 
-    public function checkIfSubjectAlreadyExists($course_id, $subject_code, $type, $year_lvl, $semester)
+    public function checkIfSubjectAlreadyExists($subject_code, $type, $year_lvl, $semester)
     {
         try {
 
-            $stmt = $this->db->prepare("SELECT * FROM subjects WHERE course_id = :course_id AND subject_code = :subject_code AND type = :type AND year_lvl = :year_lvl AND semester = :semester");
+            $stmt = $this->db->prepare("SELECT * FROM subjects WHERE subject_code = :subject_code AND type = :type AND year_lvl = :year_lvl AND semester = :semester");
             $stmt->execute([
-                'course_id' => $course_id,
                 'subject_code' => $subject_code,
                 'type' => $type,
                 'year_lvl' => $year_lvl,
@@ -181,11 +180,11 @@ class Subject extends Dbh
         }
     }
 
-    public function updateSubject($subject_id, $course_id, $subject_code, $subject_name, $pre_requisite, $lab_units, $lec_units, $units, $type, $year_lvl, $semester)
+    public function updateSubject($subject_id, $subject_code, $subject_name, $pre_requisite, $lab_units, $lec_units, $units, $type, $year_lvl, $semester)
     {
         try {
-            $stmt = $this->db->prepare("UPDATE subjects SET course_id = :course_id, subject_code = :subject_code, subject_name = :subject_name, pre_requisite = :pre_requisite, lab_units = :lab_units,lec_units=:lec_units,total_units = :total_units, type = :type,year_lvl = :year_lvl, semester = :semester WHERE id = :id");
-            $stmt->execute(['course_id' => $course_id, 'subject_code' => $subject_code, 'subject_name' => $subject_name, 'pre_requisite' => $pre_requisite, 'lab_units' => $lab_units, 'lec_units' => $lec_units, 'total_units' => $units, 'type' => $type, 'year_lvl' => $year_lvl, 'semester' => $semester, 'id' => $subject_id]);
+            $stmt = $this->db->prepare("UPDATE subjects SET subject_code = :subject_code, subject_name = :subject_name, pre_requisite = :pre_requisite, lab_units = :lab_units,lec_units=:lec_units,total_units = :total_units, type = :type,year_lvl = :year_lvl, semester = :semester WHERE id = :id");
+            $stmt->execute(['subject_code' => $subject_code, 'subject_name' => $subject_name, 'pre_requisite' => $pre_requisite, 'lab_units' => $lab_units, 'lec_units' => $lec_units, 'total_units' => $units, 'type' => $type, 'year_lvl' => $year_lvl, 'semester' => $semester, 'id' => $subject_id]);
             if ($stmt->rowCount() > 0) {
                 return [
                     "status" => "success",
@@ -234,5 +233,49 @@ class Subject extends Dbh
     public function calculateTotalUnits($lab, $lec)
     {
         return (int)$lab + (int)$lec;
+    }
+
+    public function test($course_id)
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT DISTINCT
+            s.id AS subject_id,
+            s.subject_code,
+            s.subject_name,
+            s.type,
+            s.year_lvl,
+            s.semester,
+            s.lec_units,
+            s.lab_units,
+            s.total_units
+        FROM courses AS c
+        JOIN curriculum AS cur 
+            ON cur.course_id = c.id
+        JOIN curriculum_subjects AS cs 
+            ON cs.curriculum_id = cur.id
+        JOIN subjects AS s 
+            ON s.id = cs.subject_id
+        WHERE c.id = :course_id
+        ORDER BY s.year_lvl, s.semester, s.subject_code");
+            $stmt->execute(['course_id' => $course_id]);
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($row) {
+                return [
+                    "status" => "success",
+                    "message" => "Subjects found.",
+                    "data" => $row
+                ];
+            } else {
+                return [
+                    "status" => "error",
+                    "message" => "Subjects not found."
+                ];
+            }
+        } catch (PDOException $e) {
+            return [
+                "status" => "error",
+                "message" => "Database Error: " . $e->getMessage()
+            ];
+        }
     }
 }

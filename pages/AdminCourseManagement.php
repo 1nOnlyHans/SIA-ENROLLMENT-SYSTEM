@@ -6,8 +6,10 @@ include "../includes/AdminSidebar.php";
     <div class="page-inner">
         <div class="card">
             <div class="card-body">
-                <h2>List of Courses</h2>
-                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#AddCourse">+ New Course</button>
+                <div class="d-flex justify-content-between align-content-center">
+                    <h2>List of Courses</h2>
+                    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#AddCourse">+ New Course</button>
+                </div>
                 <table class="table table-responsive table-bordered table-striped" id="course-tbl">
                     <thead class="thead-dark">
                         <tr>
@@ -100,33 +102,14 @@ include "../includes/AddCourseModal.php";
                         paging: true,
                         dom: "Blfrtip",
                         buttons: [{
-                                extend: "print",
-                                title: "List of Courses",
-                                text: "Print",
-                                className: "btn btn-primary me-3 mb-3",
-                                exportOptions: {
-                                    columns: [0, 1, 2, 3, 4]
-                                }
-                            },
-                            {
-                                extend: "csv",
-                                title: "List of Courses",
-                                text: "CSV",
-                                className: "btn btn-primary me-3 mb-3",
-                                exportOptions: {
-                                    columns: [0, 1, 2, 3, 4]
-                                }
-                            },
-                            {
-                                extend: "pdf",
-                                title: "List of Courses",
-                                text: "PDF",
-                                className: "btn btn-primary me-3 mb-3",
-                                exportOptions: {
-                                    columns: [0, 1, 2, 3, 4]
-                                }
+                            extend: "print",
+                            title: "",
+                            text: "<i class='fa-solid fa-print'></i> Print",
+                            className: "btn btn-danger me-3 mb-3 fw-bold",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3]
                             }
-                        ]
+                        }, ]
                     });
                 }
             } catch (error) {

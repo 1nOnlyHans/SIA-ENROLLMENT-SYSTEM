@@ -87,35 +87,28 @@
 
         fetchActiveSchoolYear();
 
-        const fetchAllSubjectByCourse = async () => {
+        const fetchAllSubjects = async () => {
             var course_id = $('#course_id').val();
             try {
                 const response = await $.ajax({
-                    method: "POST",
-                    url: "../Actions/Subject.php?actionType=GetAllSubjectByCourse",
-                    data: {
-                        course_id: course_id
-                    },
+                    method: "GET",
+                    url: "../Actions/Subject.php?actionType=GetAllSubjects",
                     dataType: "json"
                 });
                 console.log(response);
                 if (response.status === "success") {
+                    const select = $('#subject_id');
+                    select.empty();
                     let options = response.data.map((data) => {
                         let option = $('<option></option>').val(data.id).text(data.subject_code + ' ' + data.subject_name)
                         return option;
                     });
-                    const select = $('#subject_id');
-                    select.empty();
                     select.append(options);
                 }
             } catch (error) {
                 console.log(error);
             }
         }
-
-        $('#course_id').on('change', function() {
-            fetchAllSubjectByCourse();
-        });
 
         $('#subject_id').select2({
             theme: "bootstrap-5",
@@ -124,5 +117,7 @@
             dropdownCssClass: "select2--large",
             width: "resolve"
         });
+
+        fetchAllSubjects();
     });
 </script>

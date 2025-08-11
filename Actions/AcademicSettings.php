@@ -30,6 +30,11 @@ switch ($actionType) {
             $response = $action->getActiveSemesterForActiveSy();
         }
         break;
+    case 'GetAllSchoolYear':
+        if ($request_method === "GET") {
+            $response = $action->getAllSchoolYear();
+        }
+        break;
     default:
         $response = [
             "status" => "error",

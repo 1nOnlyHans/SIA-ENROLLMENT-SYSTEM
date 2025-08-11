@@ -44,46 +44,53 @@ include "../includes/sessionchecker.php";
           <ul class="nav nav-primary">
             <li class="nav-item">
               <a href="AdminDashboard.php?page=AdminDashboard">
-                <i class="fa-solid fa-house"></i>
+                <i class="fa-solid fa-gauge"></i>
                 <p>Dashboard</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="AdminUserManagement.php?page=UserManagement">
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-users-cog"></i>
                 <p>User Management</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="AdminCurriculumManagement.php?page=Curriculum Management">
-                <i class="fa-solid fa-building"></i>
+                <i class="fa-solid fa-layer-group"></i>
                 <p>Curriculum Management</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="AdminDepartmentManagement.php?page=Department Management">
-                <i class="fa-solid fa-building"></i>
-                <p>Deparment Management</p>
+                <i class="fa-solid fa-building-columns"></i>
+                <p>Department Management</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="AdminCourseManagement.php?page=Course Management">
-                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-book-open"></i>
                 <p>Course Management</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="AdminSubjectManagement.php?page=Subject Management">
-                <i class="fa-solid fa-chalkboard"></i>
+                <i class="fa-solid fa-book"></i>
                 <p>Subject Management</p>
               </a>
             </li>
             <li class="nav-item">
+              <a href="AdminSectionManagement.php?page=Section Management">
+                <i class="fa-solid fa-book"></i>
+                <p>Section Management</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="AdminInstructorManagement.php?page=Instructor Management">
-                <i class="fa-solid fa-chalkboard"></i>
+                <i class="fa-solid fa-person-chalkboard"></i>
                 <p>Instructor Management</p>
               </a>
             </li>
+
           </ul>
         </div>
       </div>

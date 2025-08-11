@@ -78,4 +78,23 @@ class AcademicSettings extends Dbh
             "semester" => $semResult["data"]
         ];
     }
+
+    public function getAllSchoolYear()
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM school_year");
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return [
+                "status" => "success",
+                "message" => "Active school year fetched successfully",
+                "data" => $data
+            ];
+        } catch (PDOException $e) {
+            return [
+                "status" => "error",
+                "message" => "Database Error: " . $e->getMessage()
+            ];
+        }
+    }
 }
