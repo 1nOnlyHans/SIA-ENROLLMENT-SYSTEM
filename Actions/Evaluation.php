@@ -69,6 +69,15 @@ switch ($actionType) {
             if ($findEvalId['status'] === "success") {
                 $evaluation_id = $findEvalId['data']['id'];
                 foreach ($credited_subjects as $subject) {
+                    $checkIfCredited = $evaluation->checkIfAlreadyCredited($applicant_id, $subject, $evaluation_id);
+                    if ($checkIfCredited['status'] === "error") {
+                        $response = [
+                            "status" => "error",
+                            "message" => "Subject already credited"
+                        ];
+                        break;
+                    }
+
                     $saveCredit = $evaluation->saveCreditedSubject($applicant_id, $subject, $evaluation_id, $status = 'Credited');
                     if ($saveCredit['status'] !== "success") {
                         $response = $saveCredit;

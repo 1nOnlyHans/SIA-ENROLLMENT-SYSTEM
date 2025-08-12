@@ -7,10 +7,12 @@ include "../includes/RegistrarNavbar.php";
     <?php include "../includes/sidebar.php"; ?>
     <div class="flex-grow-1 p-3">
         <div class="container">
-            <h1 class="text-center">Applicants</h1>
             <div class="card">
+                <div class="card-header bg-dark">
+                    <h1 class="text-center text-white">Pending Applicants</h1>
+                </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped" id="applicant-tbl">
+                    <table class="table table-striped" id="applicant-tbl">
                         <thead class="thead-dark">
                             <tr>
                                 <th class="text-center">Full Name</th>

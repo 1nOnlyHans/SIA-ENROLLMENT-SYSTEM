@@ -6,88 +6,81 @@ include "../includes/RegistrarNavbar.php";
 <div class="d-flex">
     <?php include "../includes/sidebar.php"; ?>
 
-    <div class="flex-grow-1 p-4">
+    <main class="flex-grow-1 p-4 bg-light" style="min-height: 100vh;">
         <div class="container-fluid">
-            <div class="row mb-3">
-                <div class="col-md-6 col-lg-4 mb-3">
-                    <label for="name" class="form-label fw-bold">Search Student by Name:</label>
-                    <div class="input-group">
-                        <select name="name" id="name" class="form-control"></select>
-                    </div>
+            <div class="row mb-4">
+                <div class="col-md-6 col-lg-4">
+                    <label for="name" class="form-label fw-semibold fs-6">Search Student by Name</label>
+                    <select name="name" id="name" class="form-select"></select>
                 </div>
-                <hr>
             </div>
-            <div class="informationContainer mb-3">
-                <h2>Student Information</h2>
+
+            <section class="mb-5 p-4 bg-white shadow-sm rounded">
+                <h3 class="mb-4 text-primary fw-bold border-bottom pb-2">Student Information</h3>
                 <input type="hidden" name="applicant_id" id="applicant_id" class="form-control">
-                <div class="mb-3" style="max-width: 400px;">
-                    <label for="" class="form-label d-flex align-items-center mb-1">
-                        <strong class="me-2" style="min-width: 100px;">Full Name:</strong>
-                        <input type="text" class="form-control flex-grow-1" id="student_name" readonly>
-                    </label>
-                </div>
-
-                <div class="mb-3" style="max-width: 400px;">
-                    <label for="" class="form-label d-flex align-items-center mb-1">
-                        <strong class="me-2" style="min-width: 100px;">Year Level:</strong>
-                        <input type="text" class="form-control flex-grow-1" id="student_year_level" readonly>
-                    </label>
-                </div>
-
-                <div class="mb-3" style="max-width: 400px;">
-                    <label for="" class="form-label d-flex align-items-center mb-1">
-                        <strong class="me-2" style="min-width: 100px;">Course:</strong>
-                        <input type="text" class="form-control flex-grow-1" id="student_course" readonly>
-                    </label>
-                </div>
-            </div>
-            <hr>
-            <div class="">
-                <div class="row">
-                    <div class="col-12 col-md-12 mb-3">
-                        <select name="course" id="course" class="form-control">
-                            <option value=""> --Course-- </option>
-                        </select>
+                <div class="row gy-3">
+                    <div class="col-md-6 col-lg-4">
+                        <label class="form-label d-flex align-items-center mb-1">
+                            <span class="fw-semibold me-3" style="min-width: 110px;">Full Name:</span>
+                            <input type="text" class="form-control flex-grow-1" id="student_name" readonly>
+                        </label>
                     </div>
-                    <div class="col-12 col-md-12 mb-3">
-                        <select name="subjects" id="subjects" class="form-control" multiple>
-                            <option value=""> --Subjects-- </option>
-                        </select>
+                    <div class="col-md-6 col-lg-4">
+                        <label class="form-label d-flex align-items-center mb-1">
+                            <span class="fw-semibold me-3" style="min-width: 110px;">Year Level:</span>
+                            <input type="text" class="form-control flex-grow-1" id="student_year_level" readonly>
+                        </label>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <label class="form-label d-flex align-items-center mb-1">
+                            <span class="fw-semibold me-3" style="min-width: 110px;">Course:</span>
+                            <input type="text" class="form-control flex-grow-1" id="student_course" readonly>
+                        </label>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header bg-success">
-                                <h5 class="card-title text-white">Credited Subject</h5>
-                            </div>
-                            <div class="card-body">
-                                <div style="max-height: 200px; overflow-y: auto;">
-                                    <table class="table table-bordered mb-0">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th>Status</th>
-                                                <th>Code</th>
-                                                <th>Equivalent</th>
-                                                <th>Units</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="creditedSubjects">
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="d-flex justify-content-center mt-3">
-                                    <button type="button" class="btn btn-dark d-none" id="creditBtn">Credit Subject</button>
-                                </div>
-                            </div>
+            </section>
+
+            <section class="mb-5 p-4 bg-white shadow-sm rounded">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6 col-lg-4">
+                        <select name="course" id="course" class="form-select" disabled>
+                            <option value="">-- Select Course --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-lg-8">
+                        <select name="subjects" id="subjects" class="form-select" multiple disabled>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Credited Subjects</h5>
+                    </div>
+                    <div class="card-body p-3">
+                        <div style="max-height: 220px; overflow-y: auto;">
+                            <table class="table table-bordered table-striped mb-0 align-middle text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Code</th>
+                                        <th>Equivalent</th>
+                                        <th>Units</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="creditedSubjects"></tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="button" class="btn btn-dark d-none" id="creditBtn">Credit Subject</button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </div>
+    </main>
 </div>
-
 <script>
     $(document).ready(function() {
         $('#name').select2({
@@ -219,7 +212,7 @@ include "../includes/RegistrarNavbar.php";
                                 });
                                 return $('<option></option>').val(optionData).text(data.subject_name);
                             });
-                            select.append($('<option></option>').val('').text('Select Subject'));
+
                             select.append(options);
                         } else {
                             console.error("Error fetching subjects:", response.message);
@@ -283,6 +276,7 @@ include "../includes/RegistrarNavbar.php";
                     },
                     dataType: "json",
                     success: function(response) {
+                        console.log(response);
                         if (response.status === "success") {
                             Swal.fire({
                                 icon: 'success',

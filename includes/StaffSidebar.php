@@ -6,8 +6,8 @@
             </a>
         </li>
         <li>
-            <a href="StaffNewEnrollees.php?page=StaffNewEnrollees" class="text-white">
-                New enrollees
+            <a href="StaffSelectStudType.php?page=StaffSelectStudType" class="text-white">
+                Enroll a Student
             </a>
         </li>
         <li>

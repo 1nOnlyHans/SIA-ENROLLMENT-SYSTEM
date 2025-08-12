@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2025 at 08:37 AM
+-- Generation Time: Aug 11, 2025 at 01:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,7 +58,9 @@ CREATE TABLE `applicants` (
 --
 
 INSERT INTO `applicants` (`id`, `applicant_type`, `desired_course`, `firstname`, `middlename`, `lastname`, `suffix`, `address`, `email`, `mobile_no`, `gender`, `nationality`, `dob`, `transferee_yr_level`, `transferee_prv_school`, `transferee_prv_course`, `shs_school`, `year_graduated`, `strand`, `sy`, `semester`, `status`, `register_at`) VALUES
-(1, 'Transferee', 2, 'Hans Andrei', 'Ang', 'Diaz', '', 'Blk 1 Lot 1 Wano Kuni Ph 3 Trece Martires Cavite', 'hansNigga@gmail.com', '09123456789', 'Male', 'Filipino', '2005-06-20', '2nd', 'Sti College Dasma', 'BSBA', 'Gateway Integrated School of Science &amp; Technology, Inc.', '2023', 'GAS', 1, 1, 'Evaluated', '2025-08-11');
+(1, 'Transferee', 2, 'Hans Andrei', 'Ang', 'Diaz', '', 'Blk 1 Lot 1 Wano Kuni Ph 3 Trece Martires Cavite', 'hansNigga@gmail.com', '09123456789', 'Male', 'Filipino', '2005-06-20', '2nd', 'Sti College Dasma', 'BSBA', 'Gateway Integrated School of Science &amp; Technology, Inc.', '2023', 'GAS', 1, 1, 'Evaluated', '2025-08-11'),
+(2, 'Freshmen', 2, 'Killua', '', 'Zoldyck', '', 'BLK 1 LOT 1 TITE HOMES', 'killua@gmail.com', '09123456789', 'Male', 'Filipino', '2006-06-05', '', '', '', 'National College of Science and Technology', '2024', 'HUMSS', 1, 1, 'Evaluated', '2025-08-11'),
+(3, 'Transferee', 2, 'Gon', '', 'Freecs', '', 'BLK 1 LOT 1', 'gon@gmail.com', '09123456789', 'Male', 'Filipino', '2003-06-07', '2nd', 'Sti Dasmarinas', 'BSBA', 'Access Computer and Technical College-Camarin Campus', '2018', 'TVL', 1, 1, 'Evaluated', '2025-08-11');
 
 -- --------------------------------------------------------
 
@@ -80,20 +82,8 @@ CREATE TABLE `applicant_credited_subjects` (
 --
 
 INSERT INTO `applicant_credited_subjects` (`id`, `applicant_id`, `subject_id`, `evaluation_id`, `credit_status`, `credited_at`) VALUES
-(1, 1, 2, 1, 'Credited', '2025-08-11 14:02:34'),
-(2, 1, 3, 1, 'Credited', '2025-08-11 14:02:34'),
-(3, 1, 4, 1, 'Credited', '2025-08-11 14:02:34'),
-(4, 1, 1, 1, 'Credited', '2025-08-11 14:02:34'),
-(5, 1, 5, 1, 'Credited', '2025-08-11 14:02:34'),
-(6, 1, 6, 1, 'Credited', '2025-08-11 14:02:34'),
-(7, 1, 7, 1, 'Credited', '2025-08-11 14:02:34'),
-(8, 1, 8, 1, 'Credited', '2025-08-11 14:02:34'),
-(9, 1, 9, 1, 'Credited', '2025-08-11 14:02:34'),
-(10, 1, 10, 1, 'Credited', '2025-08-11 14:02:34'),
-(11, 1, 11, 1, 'Credited', '2025-08-11 14:02:34'),
-(12, 1, 12, 1, 'Credited', '2025-08-11 14:02:34'),
-(13, 1, 13, 1, 'Credited', '2025-08-11 14:02:34'),
-(14, 1, 14, 1, 'Credited', '2025-08-11 14:02:34');
+(1, 1, 2, 1, 'Credited', '2025-08-11 16:54:15'),
+(2, 1, 3, 1, 'Credited', '2025-08-11 16:56:06');
 
 -- --------------------------------------------------------
 
@@ -252,7 +242,9 @@ CREATE TABLE `evaluations` (
 --
 
 INSERT INTO `evaluations` (`id`, `applicant_id`, `evaluator_id`, `status`, `remarks`, `remarks_note`, `evaluated_at`) VALUES
-(1, 1, 5, 'Pass', 'Complete Documents and Approved for Enrollment', '', '2025-08-11 13:32:04');
+(1, 1, 5, 'Pass', 'Complete Documents and Approved for Enrollment', '', '2025-08-11 13:32:04'),
+(2, 2, 5, 'Pass', 'Complete Documents and Approved for Enrollment', '', '2025-08-11 16:24:12'),
+(3, 3, 5, 'Pass', 'Complete Documents and Approved for Enrollment', '', '2025-08-11 16:24:20');
 
 -- --------------------------------------------------------
 
@@ -285,7 +277,16 @@ INSERT INTO `evaluation_documents` (`id`, `evaluation_id`, `document_type_id`, `
 (11, 1, 2, 'Present'),
 (12, 1, 3, 'Present'),
 (13, 1, 4, 'Present'),
-(14, 1, 5, 'Present');
+(14, 1, 5, 'Present'),
+(15, 2, 1, 'Present'),
+(16, 2, 2, 'Present'),
+(17, 2, 3, 'Present'),
+(18, 2, 4, 'Present'),
+(19, 3, 1, 'Present'),
+(20, 3, 2, 'Present'),
+(21, 3, 3, 'Present'),
+(22, 3, 4, 'Present'),
+(23, 3, 5, 'Present');
 
 -- --------------------------------------------------------
 
@@ -312,58 +313,26 @@ CREATE TABLE `schedules` (
 --
 
 INSERT INTO `schedules` (`id`, `section_id`, `subject_id`, `type`, `instructor`, `days`, `start_time`, `end_time`, `room`, `current_enrolled`, `maximum_slot`) VALUES
-(1, 1, 2, 'Lec', 'test', 'M,W,F', '09:41:00', '10:41:00', '1232', 0, 40),
-(2, 1, 3, 'Lec', 'test', 'T,TH', '10:42:00', '11:42:00', '1232', 0, 40),
-(3, 1, 4, 'Lec', 'test', 'W', '00:42:00', '01:42:00', '1232', 0, 40),
-(4, 1, 1, 'Lab', 'test', 'T', '01:42:00', '02:42:00', '1232', 0, 40),
-(5, 1, 1, 'Lec', 'test', 'W,F', '03:42:00', '04:42:00', '1232', 0, 40),
-(6, 1, 5, 'Lab', 'test', 'W,TH', '09:42:00', '11:42:00', '1232', 0, 40),
-(7, 2, 2, 'Lec', 'test', 'M,W,F', '09:41:00', '10:41:00', '1232', 0, 40),
-(8, 2, 3, 'Lec', 'test', 'T,TH', '10:42:00', '11:42:00', '1232', 0, 40),
-(9, 2, 4, 'Lec', 'test', 'W', '00:42:00', '01:42:00', '1232', 0, 40),
-(10, 2, 1, 'Lab', 'test', 'T', '01:42:00', '02:42:00', '1232', 0, 40),
-(11, 2, 1, 'Lec', 'test', 'W,F', '03:42:00', '04:42:00', '1232', 0, 40),
-(12, 2, 5, 'Lab', 'test', 'W,TH', '09:42:00', '11:42:00', '1232', 0, 40),
-(13, 3, 2, 'Lec', 'test', 'M,W,F', '09:41:00', '10:41:00', '1232', 0, 40),
-(14, 3, 3, 'Lec', 'test', 'T,TH', '10:42:00', '11:42:00', '1232', 0, 40),
-(15, 3, 4, 'Lec', 'test', 'W', '00:42:00', '01:42:00', '1232', 0, 40),
-(16, 3, 1, 'Lab', 'test', 'T', '01:42:00', '02:42:00', '1232', 0, 40),
-(17, 3, 1, 'Lec', 'test', 'W,F', '03:42:00', '04:42:00', '1232', 0, 40),
-(18, 3, 5, 'Lab', 'test', 'W,TH', '13:42:00', '14:42:00', '1232', 0, 40),
-(19, 4, 2, 'Lec', 'test', 'M,W,F', '09:41:00', '10:41:00', '1232', 0, 40),
-(20, 4, 3, 'Lec', 'test', 'T,TH', '10:42:00', '11:42:00', '1232', 0, 40),
-(21, 4, 4, 'Lec', 'test', 'W', '00:42:00', '01:42:00', '1232', 0, 40),
-(22, 4, 1, 'Lab', 'test', 'T', '01:42:00', '02:42:00', '1232', 0, 40),
-(23, 4, 1, 'Lec', 'test', 'W,F', '03:42:00', '04:42:00', '1232', 0, 40),
-(24, 4, 5, 'Lab', 'test', 'W,TH', '13:42:00', '14:42:00', '1232', 0, 40),
-(25, 4, 5, 'Lec', 'test', 'F,SU', '02:42:00', '03:42:00', '1232', 0, 40),
-(26, 4, 6, 'Lec', 'test', 'F,SU', '00:42:00', '01:42:00', '1232', 0, 40),
-(27, 5, 2, 'Lec', 'test', 'M,W,F', '09:41:00', '10:41:00', '1232', 0, 40),
-(28, 5, 3, 'Lec', 'test', 'T,TH', '10:42:00', '11:42:00', '1232', 0, 40),
-(29, 5, 4, 'Lec', 'test', 'W', '00:42:00', '01:42:00', '1232', 0, 40),
-(30, 5, 1, 'Lab', 'test', 'T', '01:42:00', '02:42:00', '1232', 0, 40),
-(31, 5, 1, 'Lec', 'test', 'W,F', '03:42:00', '04:42:00', '1232', 0, 40),
-(32, 5, 5, 'Lab', 'test', 'W,TH', '13:42:00', '14:42:00', '1232', 0, 40),
-(33, 5, 5, 'Lec', 'test', 'F,SU', '02:42:00', '03:42:00', '1232', 0, 40),
-(34, 5, 6, 'Lec', 'test', 'F,SU', '00:42:00', '01:42:00', '1232', 0, 40),
-(35, 6, 2, 'Lec', 'test', 'M,W,F', '09:41:00', '10:41:00', '1232', 0, 40),
-(36, 6, 3, 'Lec', 'test', 'T,TH', '10:42:00', '11:42:00', '1232', 0, 40),
-(37, 6, 4, 'Lec', 'test', 'W', '00:42:00', '01:42:00', '1232', 0, 40),
-(38, 6, 1, 'Lab', 'test', 'T', '01:42:00', '02:42:00', '1232', 0, 40),
-(39, 6, 1, 'Lec', 'test', 'W,F', '03:42:00', '04:42:00', '1232', 0, 40),
-(40, 6, 5, 'Lab', 'test', 'W,TH', '13:42:00', '14:42:00', '1232', 0, 40),
-(41, 6, 5, 'Lec', 'test', 'F,SU', '02:42:00', '03:42:00', '1232', 0, 40),
-(42, 6, 6, 'Lec', 'test', 'F,SU', '00:42:00', '01:42:00', '1232', 0, 40),
-(43, 7, 2, 'Lec', 'test', 'M,W,F', '09:41:00', '10:41:00', '1232', 0, 40),
-(44, 7, 3, 'Lec', 'test', 'T,TH', '10:42:00', '11:42:00', '1232', 0, 40),
-(45, 7, 4, 'Lec', 'test', 'W', '00:42:00', '01:42:00', '1232', 0, 40),
-(46, 7, 1, 'Lab', 'test', 'T', '01:42:00', '02:42:00', '1232', 0, 40),
-(47, 7, 1, 'Lec', 'test', 'W,F', '03:42:00', '04:42:00', '1232', 0, 40),
-(48, 7, 5, 'Lab', 'test', 'W,TH', '13:42:00', '14:42:00', '1232', 0, 40),
-(49, 7, 5, 'Lec', 'test', 'F,SU', '02:42:00', '03:42:00', '1232', 0, 40),
-(50, 7, 6, 'Lec', 'test', 'F,SU', '00:42:00', '01:42:00', '1232', 0, 40),
-(51, 7, 7, 'Lec', 'test', 'T,F', '10:42:00', '11:42:00', '1232', 0, 40),
-(52, 7, 8, 'Lec', 'test', 'W,S', '00:42:00', '01:42:00', '1232', 0, 40);
+(1, 1, 2, 'Lec', 'Instructor', 'M,W,F', '13:08:00', '13:15:00', '1309', 0, 40),
+(2, 1, 3, 'Lec', 'Instructor', 'T', '18:08:00', '18:10:00', '1309', 0, 40),
+(3, 1, 4, 'Lec', 'Instructor', 'W', '19:08:00', '19:15:00', '1309', 0, 40),
+(4, 1, 1, 'Lab', 'Instructor', 'TH', '19:08:00', '19:15:00', '1309', 0, 40),
+(5, 1, 1, 'Lec', 'Instructor', 'TH', '19:08:00', '19:14:00', '1309', 0, 40),
+(6, 1, 5, 'Lab', 'Instructor', 'S', '18:10:00', '18:12:00', '1309', 0, 40),
+(7, 1, 5, 'Lec', 'Instructor', 'S', '18:14:00', '18:17:00', '1309', 0, 40),
+(8, 1, 6, 'Lec', 'Instructor', 'S', '18:18:00', '18:19:00', '1309', 0, 40),
+(9, 1, 7, 'Lec', 'Instructor', 'SU', '18:20:00', '18:26:00', '1309', 0, 40),
+(10, 1, 8, 'Lec', 'Instructor', 'SU', '18:27:00', '18:33:00', '1309', 0, 40),
+(11, 2, 2, 'Lec', 'Instructor', 'M', '18:11:00', '18:12:00', '1309', 0, 40),
+(12, 2, 3, 'Lec', 'Instructor', 'T', '18:11:00', '18:12:00', '1309', 0, 40),
+(13, 2, 4, 'Lec', 'Instructor', 'W', '18:11:00', '18:12:00', '1309', 0, 40),
+(14, 2, 1, 'Lab', 'Instructor', 'W', '18:11:00', '18:12:00', '1309', 0, 40),
+(15, 2, 1, 'Lec', 'Instructor', 'TH', '18:11:00', '18:12:00', '1309', 0, 40),
+(16, 2, 5, 'Lab', 'Instructor', 'TH', '18:11:00', '18:12:00', '1309', 0, 40),
+(17, 2, 5, 'Lec', 'Instructor', 'F', '18:11:00', '18:12:00', '1309', 0, 40),
+(18, 2, 6, 'Lec', 'Instructor', 'S', '18:11:00', '18:12:00', '1309', 0, 40),
+(19, 2, 7, 'Lec', 'Instructor', 'TH', '18:11:00', '18:12:00', '1309', 0, 40),
+(20, 2, 8, 'Lec', 'Instructor', 'SU', '18:11:00', '18:12:00', '1309', 0, 40);
 
 -- --------------------------------------------------------
 
@@ -408,12 +377,7 @@ CREATE TABLE `sections` (
 
 INSERT INTO `sections` (`id`, `course_id`, `year_level`, `semester`, `section`, `type`, `current_slot`, `maximum_slot`, `status`) VALUES
 (1, 2, '1', '1', 'BSIT 11M1', 'Morning', 0, 40, 'Open'),
-(2, 2, '1', '1', 'BSIT 11M1', 'Morning', 0, 40, 'Open'),
-(3, 2, '1', '1', 'BSIT 11M1', 'Morning', 0, 40, 'Open'),
-(4, 2, '1', '1', 'BSIT 11M1', 'Morning', 0, 40, 'Open'),
-(5, 2, '1', '1', 'BSIT 11M1', 'Morning', 0, 40, 'Open'),
-(6, 2, '1', '1', 'BSIT 11M1', 'Morning', 0, 40, 'Open'),
-(7, 2, '1', '1', 'BSIT 11M1', 'Morning', 0, 40, 'Open');
+(2, 2, '1', '1', 'BSIT 11A1', 'Afternoon', 0, 40, 'Open');
 
 -- --------------------------------------------------------
 
@@ -620,13 +584,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applicants`
 --
 ALTER TABLE `applicants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `applicant_credited_subjects`
 --
 ALTER TABLE `applicant_credited_subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -662,19 +626,19 @@ ALTER TABLE `documents_type`
 -- AUTO_INCREMENT for table `evaluations`
 --
 ALTER TABLE `evaluations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `evaluation_documents`
 --
 ALTER TABLE `evaluation_documents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `school_year`
@@ -686,7 +650,7 @@ ALTER TABLE `school_year`
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `semesters`

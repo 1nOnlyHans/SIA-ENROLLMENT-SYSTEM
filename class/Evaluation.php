@@ -187,4 +187,21 @@ class Evaluation extends Dbh
             ];
         }
     }
+
+    public function checkIfAlreadyCredited($applicant_id, $subject_id, $evaluation_id)
+    {
+        $checkIfExists = $this->db->prepare("SELECT * FROM applicant_credited_subjects WHERE applicant_id = :applicant_id AND subject_id = :subject_id AND evaluation_id = :evaluation_id");
+        $checkIfExists->execute(['applicant_id' => $applicant_id, 'subject_id' => $subject_id, 'evaluation_id' => $evaluation_id]);
+        if ($checkIfExists->rowCount() > 0) {
+            return [
+                "status" => "error",
+                "message" => "Subject already credited for this applicant"
+            ];
+        } else {
+            return [
+                "status" => "success",
+                "message" => "Subject not credited yet"
+            ];
+        }
+    }
 }

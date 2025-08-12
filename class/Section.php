@@ -13,7 +13,6 @@ class Section extends Dbh
     // CREATE
     public function createSection($course_id, $year_level, $section, $type)
     {
-
         $sql = "INSERT INTO sections (course_id, year_level, section, type) 
             VALUES (:course_id, :year_level, :section, :type)";
         $stmt = $this->db->prepare($sql);
